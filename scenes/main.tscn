@@ -4,3 +4,5 @@
 
 [node name="Main" type="Node"]
 script = ExtResource("1_hul6j")
+
+[node name="Environment" type="MeshInstance3D" parent="."]
