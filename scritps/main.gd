@@ -30,3 +30,6 @@ func new_game() -> void:
 
 func spawn_player() -> void:
 	player = player_scene.instantiate()
+	
+func _on_player_diceroll(dice_value):
+	get_node("Enemy").on_player_diceroll(dice_value);
