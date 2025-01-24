@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqtxq68vygjhg"]
+
+[ext_resource type="Script" path="res://Scripts/dice.gd" id="1_ecuht"]
+
+[node name="Dice" type="Node2D"]
+script = ExtResource("1_ecuht")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 210.0
+offset_bottom = 80.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 35
+text = "D0"
+
+[node name="UseButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -36.0
+offset_right = 100.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "USE"
+
+[node name="SplitButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -36.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "SPLIT
+"
+
+[node name="HalfDieSpawnPos" type="Marker2D" parent="."]
+position = Vector2(110, 0)
+
+[connection signal="pressed" from="Control/UseButton" to="." method="_on_use_button_pressed"]
+[connection signal="pressed" from="Control/SplitButton" to="." method="_on_split_button_pressed"]
