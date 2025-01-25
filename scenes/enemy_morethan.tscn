@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwlqsssnfmg71"]
+
+[ext_resource type="Script" path="res://scritps/enemy.gd" id="1_7g3cs"]
+[ext_resource type="Texture2D" uid="uid://62kou76jb74k" path="res://enemy_placeholder_anim.png" id="2_ojehq"]
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_7g3cs")
+condition_values = Array[int]([2])
+
+[node name="EnemySprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+texture = ExtResource("2_ojehq")
+vframes = 4
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 2176.52)
+
+[node name="EnemyLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+text = "lorem ipsum"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
