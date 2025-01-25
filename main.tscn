@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://t747cctvqypi"]
+
+[ext_resource type="Script" path="res://scritps/main.gd" id="1_hul6j"]
+[ext_resource type="PackedScene" uid="uid://b8tm182wgl0hu" path="res://scenes/enemy.tscn" id="2_kjsp6"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_hul6j")
+
+[node name="Enemy" parent="." instance=ExtResource("2_kjsp6")]
+
+[node name="Environment" type="MeshInstance3D" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="PlayerSpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="PlayerSpawnTimer" to="." method="_on_player_spawn_timer_timeout"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
