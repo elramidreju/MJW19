@@ -28,7 +28,7 @@ func _ready() -> void:
 	$Root3D/PlayerPlaceholder.visible = false
 	$UIControl/Mosquitoe_placeholder.visible = false
 	update_dice()
-	_set_dice_input(false)
+	_enable_disable_ui_input(false)
 	update_life()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -82,7 +82,7 @@ func spawn_next_enemy() -> void:
 	current_enemy.transform = $Root3D/EnemyPlaceholder.transform
 	encounterCounter += 1
 	
-	_set_dice_input(true)
+	_enable_disable_ui_input(true)
 
 func _spawn_3d_die(faces: int):
 	
@@ -103,14 +103,24 @@ func _spawn_3d_die(faces: int):
 	new_3d_die.global_position = $Root3D/Spawned3DDice.global_position
 	$Despawn3DDiceTimer.start()
 
-func _set_dice_input(new_value:bool) -> void:
+func _enable_disable_ui_input(new_value:bool) -> void:
+	$UIControl/PassButton.disabled = !new_value
 	for die in dice:
 		die._set_input_enabled(new_value)
+
+func _player_receives_damage() -> void:
+	player_health -= 1;
+	player.react_to_damage_anim()
+	player.eat_anim()
+	update_life()
+	
+	if(player_health == 0):
+		end_game()
 
 func _on_player_diceroll(rolled_die, dice_value):
 	if !$EnemySpawnTimer.is_stopped():
 		return
-	_set_dice_input(false)
+	_enable_disable_ui_input(false)
 	
 	player.attack_anim()
 	
@@ -121,13 +131,8 @@ func _on_player_diceroll(rolled_die, dice_value):
 	
 	var condition_passed = current_enemy.on_player_diceroll(dice_value);
 	if !condition_passed:
-		player_health -= 1;
-		player.react_to_damage_anim()
-		player.eat_anim()
-		update_life()
+		_player_receives_damage()
 	
-	if(player_health == 0):
-		end_game()
 	get_node("UIControl/AnimatedDiceResultText/Label").text = str(dice_value)
 	var enemy_condition_passed = current_enemy.on_player_diceroll(dice_value);
 	current_enemy.queue_free()
@@ -176,13 +181,11 @@ func _on_despawn_3d_dice_timer_timeout() -> void:
 
 func _on_animation_player_animation_finished() -> void:
 	if !enemy_condition_passed:
-		player_health -= 1;
-		player.react_to_damage_anim()
-		player.eat_anim()
-		update_life()
-	
-	if(player_health == 0):
-		end_game()
-	#spawn_next_enemy()
+		_player_receives_damage()
 
+	$EnemySpawnTimer.start()
+
+func _on_pass_button_pressed() -> void:
+	_player_receives_damage()
+	current_enemy.queue_free()
 	$EnemySpawnTimer.start()
