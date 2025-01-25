@@ -2,6 +2,7 @@ extends Node
 
 @export var player_scene: PackedScene
 @export var enemy_scene: Array[PackedScene] = []
+@export var ui_die_scene: PackedScene
 @export var player_health: int
 
 var player: Node3D
@@ -33,7 +34,7 @@ func update_dice() -> void:
 	dice = find_children("*", "UI_Die");
 	for die in dice:
 		die.on_playerdiceroll.connect(_on_player_diceroll)
-		#die._on_split_die.connect(_on_split_die)
+		die.on_playerdicesplit.connect(_on_player_dicesplit)
 
 
 func new_game() -> void:
@@ -69,6 +70,15 @@ func _on_player_diceroll(dice_value):
 
 	current_enemy.queue_free()
 	$EnemySpawnTimer.start()
+
+func _on_player_dicesplit(new_die_pos:Vector2, new_die_size:Vector2, new_die_faces_num:int) -> void:
+	var new_die:UI_Die = ui_die_scene.instantiate() as UI_Die
+	$UIControl.add_child(new_die)
+	new_die.faces = new_die_faces_num
+	new_die._update_ui()
+	new_die.global_position.x = new_die_pos.x
+	new_die.global_position.y = new_die_pos.y
+	new_die.set_size(new_die_size)
 
 func _on_split_die():
 	update_dice()
