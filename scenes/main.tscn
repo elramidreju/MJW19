@@ -1,20 +1,24 @@
-[gd_scene load_steps=21 format=3 uid="uid://t747cctvqypi"]
+[gd_scene load_steps=25 format=3 uid="uid://t747cctvqypi"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r0c47"]
-[ext_resource type="PackedScene" uid="uid://dlga0qecmnc5d" path="res://scenes/player.tscn" id="2_matdk"]
+[ext_resource type="PackedScene" uid="uid://dlga0qecmnc5d" path="res://Scenes/player.tscn" id="2_matdk"]
 [ext_resource type="Texture2D" uid="uid://beqgm48w0mswq" path="res://granite.jpg" id="3_cpt02"]
-[ext_resource type="PackedScene" uid="uid://d27525cf1ywew" path="res://scenes/enemy_range.tscn" id="3_odqd2"]
-[ext_resource type="PackedScene" uid="uid://dql3v2r7wgc1n" path="res://scenes/enemy_odd.tscn" id="4_oes5l"]
-[ext_resource type="PackedScene" uid="uid://cwlqsssnfmg71" path="res://scenes/enemy_morethan.tscn" id="5_lk0j8"]
-[ext_resource type="PackedScene" uid="uid://bx3v0fphb6k0q" path="res://scenes/die_3d.tscn" id="7_1poff"]
-[ext_resource type="PackedScene" uid="uid://dkauyvf72kbw7" path="res://scenes/ui_die.tscn" id="8_kx7os"]
+[ext_resource type="PackedScene" uid="uid://d27525cf1ywew" path="res://Scenes/enemy_range.tscn" id="3_odqd2"]
+[ext_resource type="PackedScene" uid="uid://dql3v2r7wgc1n" path="res://Scenes/enemy_odd.tscn" id="4_oes5l"]
+[ext_resource type="PackedScene" uid="uid://cwlqsssnfmg71" path="res://Scenes/enemy_morethan.tscn" id="5_lk0j8"]
+[ext_resource type="PackedScene" uid="uid://bx3v0fphb6k0q" path="res://Scenes/die_3d.tscn" id="7_1poff"]
+[ext_resource type="PackedScene" uid="uid://dkauyvf72kbw7" path="res://Scenes/ui_die.tscn" id="8_kx7os"]
+[ext_resource type="PackedScene" uid="uid://cii2bhfcsufbf" path="res://Scenes/die_D8.tscn" id="9_7xpb8"]
 [ext_resource type="Texture2D" uid="uid://nrjew8iv4ya4" path="res://art/UI/Mosquito vida llena.png" id="9_cpeq5"]
+[ext_resource type="PackedScene" uid="uid://bemyewdxa7qu6" path="res://Scenes/die_D6.tscn" id="10_50c07"]
 [ext_resource type="Texture2D" uid="uid://q763c4unx664" path="res://art/UI/Mosquito vida vacia.png" id="10_nmfwh"]
-[ext_resource type="PackedScene" uid="uid://lehk4xls0fet" path="res://scenes/mosquitoe.tscn" id="11_4k0fp"]
-[ext_resource type="PackedScene" path="res://Scenes/surface_3d_dice.tscn" id="11_xvhqt"]
+[ext_resource type="PackedScene" uid="uid://lehk4xls0fet" path="res://Scenes/mosquitoe.tscn" id="11_4k0fp"]
+[ext_resource type="PackedScene" uid="uid://df21w8ia8gsk3" path="res://Scenes/die_D4.tscn" id="11_nr38y"]
+[ext_resource type="PackedScene" uid="uid://mdjs78ro6gao" path="res://Scenes/surface_3d_dice.tscn" id="11_xvhqt"]
+[ext_resource type="PackedScene" uid="uid://b7s031ptk10r4" path="res://Scenes/die_D3.tscn" id="12_1w7ll"]
 [ext_resource type="Texture2D" uid="uid://bqhdu64a6821c" path="res://art/backgrounds/Fondo dados.png" id="12_a8uxi"]
 [ext_resource type="Texture2D" uid="uid://dhobadkgu4pnt" path="res://icon.svg" id="13_01faa"]
-[ext_resource type="PackedScene" uid="uid://dlatb8aso4231" path="res://scenes/animated_ui_dice_result_text.tscn" id="13_l55c5"]
+[ext_resource type="PackedScene" uid="uid://dlatb8aso4231" path="res://Scenes/animated_ui_dice_result_text.tscn" id="13_l55c5"]
 [ext_resource type="Texture2D" uid="uid://b3y0cqxwwimw5" path="res://art/characters/proto_player.png" id="14_lx06f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xhi71"]
@@ -37,6 +41,10 @@ enemy_scene = Array[PackedScene]([ExtResource("5_lk0j8"), ExtResource("4_oes5l")
 health_element = ExtResource("11_4k0fp")
 ui_die_scene = ExtResource("8_kx7os")
 die_3d_scene = ExtResource("7_1poff")
+die_D8 = ExtResource("9_7xpb8")
+die_D6 = ExtResource("10_50c07")
+die_D4 = ExtResource("11_nr38y")
+die_D3 = ExtResource("12_1w7ll")
 player_health = 2
 health_texture_filled = ExtResource("9_cpeq5")
 health_texture_empty = ExtResource("10_nmfwh")
@@ -74,7 +82,7 @@ size = Vector3(1.98633, 1, 1.3439)
 material = SubResource("StandardMaterial3D_gg0w8")
 
 [node name="Spawned3DDice" type="Node3D" parent="Root3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699524, -0.0220105, -0.636196)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035845, -0.0220105, -0.44896)
 
 [node name="Surface3DDice" parent="Root3D" instance=ExtResource("11_xvhqt")]
 transform = Transform3D(0.50139, 0, 0, 0, 0.501387, -0.00175018, 0, 0.00175018, 0.501387, 0.479163, -0.20876, -0.700743)
@@ -105,15 +113,28 @@ offset_bottom = 1080.0
 texture = ExtResource("12_a8uxi")
 expand_mode = 1
 
-[node name="Die" parent="UIControl" instance=ExtResource("8_kx7os")]
+[node name="D8" parent="UIControl" instance=ExtResource("8_kx7os")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
-offset_left = 1444.0
-offset_top = -392.0
-offset_right = 1694.0
-offset_bottom = -192.0
+offset_left = 1049.0
+offset_top = -535.0
+offset_right = 1299.0
+offset_bottom = -335.0
+grow_horizontal = 1
+grow_vertical = 0
+faces = 8
+
+[node name="D6" parent="UIControl" instance=ExtResource("8_kx7os")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_left = 1050.0
+offset_top = -322.0
+offset_right = 1300.0
+offset_bottom = -122.0
 grow_horizontal = 1
 grow_vertical = 0
 faces = 6
@@ -129,6 +150,22 @@ offset_left = 1245.0
 offset_top = -68.0
 offset_right = 1595.0
 offset_bottom = 282.0
+
+[node name="PassButton" type="Button" parent="UIControl"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -150.0
+offset_right = -75.0
+offset_bottom = -75.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "Pass"
 
 [node name="StartTimer" type="Timer" parent="."]
 one_shot = true
@@ -146,6 +183,7 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
+[connection signal="pressed" from="UIControl/PassButton" to="." method="_on_pass_button_pressed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="PlayerSpawnTimer" to="." method="_on_player_spawn_timer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
