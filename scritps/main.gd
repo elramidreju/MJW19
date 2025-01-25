@@ -1,9 +1,11 @@
 extends Node
 
 @export var player_scene: PackedScene
-@export var enemy_scene: PackedScene
+@export var enemy_scene: Array[PackedScene] = []
+@export var player_health: int
 
 var player: Node3D
+var current_enemy: Node3D
 var allowInput: bool = false
 var encounterCounter: int = 0
 
@@ -22,7 +24,7 @@ func _on_player_spawn_timer_timeout() -> void:
 	spawn_player()
 
 func _on_enemy_spawn_timer_timeout() -> void:
-	pass
+	spawn_next_enemy
 
 func new_game() -> void:
 	print("Starting new game!")
@@ -31,5 +33,15 @@ func new_game() -> void:
 func spawn_player() -> void:
 	player = player_scene.instantiate()
 	
+func spawn_next_enemy() -> void:
+	current_enemy = enemy_scene[encounterCounter].instantiate()
+	encounterCounter += 1
+	
 func _on_player_diceroll(dice_value):
-	get_node("Enemy").on_player_diceroll(dice_value);
+	# next enemy spawn
+	var condition_passed = current_enemy.on_player_diceroll(dice_value);
+	if !condition_passed:
+		player_health -= 1;
+
+	current_enemy.queue_free()
+	$EnemySpawnTimer.start()
