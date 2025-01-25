@@ -2,7 +2,7 @@ class_name Die
 extends Node2D
 
 @export var faces:int = 0
-var die_scene = preload("res://Scenes/dice.tscn")
+var die_scene = preload("res://scenes/dice.tscn")
 
 func _ready() -> void:
 	_update_ui()
