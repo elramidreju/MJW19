@@ -1,4 +1,5 @@
-class_name UIDie
+class_name UI_Die
+
 extends Control
 
 @export var faces:int = 0
