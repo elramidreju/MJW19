@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuil07huwmklj"]
+[gd_scene load_steps=6 format=3 uid="uid://cuil07huwmklj"]
 
 [ext_resource type="Script" path="res://scritps/main.gd" id="1_ucuwb"]
+[ext_resource type="PackedScene" uid="uid://b8tm182wgl0hu" path="res://Scenes/enemy.tscn" id="2_gou3y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xhi71"]
 
@@ -29,3 +30,17 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Root3D/SubViewportContainer/SubViewport"]
+
+[node name="Enemy" parent="Root3D" instance=ExtResource("2_gou3y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0639018, 0, -0.631668)
+
+[node name="UIControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Button" type="Button" parent="UIControl"]
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 87.0
