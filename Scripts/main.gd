@@ -28,6 +28,7 @@ func _ready() -> void:
 	$Root3D/PlayerPlaceholder.visible = false
 	$UIControl/Mosquitoe_placeholder.visible = false
 	update_dice()
+	_set_dice_input(false)
 	update_life()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,7 +45,11 @@ func _on_enemy_spawn_timer_timeout() -> void:
 	spawn_next_enemy()
 
 func update_dice() -> void:
-	dice = find_children("*", "UI_Die");
+	var ui_control_children = $UIControl.get_children()
+	for ui_control_child in ui_control_children:
+		if ui_control_child is UI_Die && dice.has(ui_control_child) == false:
+			dice.append(ui_control_child)
+
 	for die in dice:
 		die.on_playerdiceroll.connect(_on_player_diceroll)
 		die.on_playerdicesplit.connect(_on_player_dicesplit)
@@ -77,6 +82,8 @@ func spawn_next_enemy() -> void:
 	current_enemy.transform = $Root3D/EnemyPlaceholder.transform
 	encounterCounter += 1
 	
+	_set_dice_input(true)
+
 func _spawn_3d_die(faces: int):
 	
 	var die_to_inst: PackedScene = null
@@ -95,14 +102,23 @@ func _spawn_3d_die(faces: int):
 	$Root3D/Spawned3DDice.add_child(new_3d_die)
 	new_3d_die.global_position = $Root3D/Spawned3DDice.global_position
 	$Despawn3DDiceTimer.start()
-	
-func _on_player_diceroll(rolled_die_num_faces, dice_value):
+
+func _set_dice_input(new_value:bool) -> void:
+	for die in dice:
+		die._set_input_enabled(new_value)
+
+func _on_player_diceroll(rolled_die, dice_value):
 	if !$EnemySpawnTimer.is_stopped():
 		return
+	_set_dice_input(false)
 	
 	player.attack_anim()
-		
-	_spawn_3d_die(rolled_die_num_faces)
+	
+	_spawn_3d_die(rolled_die.faces)
+	dice.erase(rolled_die)
+	
+	rolled_die.queue_free()
+	
 	var condition_passed = current_enemy.on_player_diceroll(dice_value);
 	if !condition_passed:
 		player_health -= 1;
