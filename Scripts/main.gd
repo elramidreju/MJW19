@@ -5,6 +5,10 @@ extends Node
 @export var health_element: PackedScene
 @export var ui_die_scene: PackedScene
 @export var die_3d_scene: PackedScene
+@export var die_D8: PackedScene
+@export var die_D6: PackedScene
+@export var die_D4: PackedScene
+@export var die_D3: PackedScene
 @export var player_health: int
 
 var player: Node3D
@@ -67,8 +71,21 @@ func spawn_next_enemy() -> void:
 	current_enemy.transform = $Root3D/EnemyPlaceholder.transform
 	encounterCounter += 1
 	
-func _spawn_3d_die():
-	var new_3d_die:Node3D = die_3d_scene.instantiate() as Node3D
+func _spawn_3d_die(faces: int):
+	
+	var die_to_inst: PackedScene = null
+	
+	match faces:
+		3: die_to_inst = die_D3
+		4: die_to_inst = die_D4
+		6: die_to_inst = die_D6
+		8: die_to_inst = die_D8
+	
+	if (die_to_inst == null):
+		printerr("Number of faces not supported")
+		return
+	
+	var new_3d_die:Node3D = die_to_inst.instantiate() as Node3D
 	$Root3D/Spawned3DDice.add_child(new_3d_die)
 	new_3d_die.global_position = $Root3D/Spawned3DDice.global_position
 	$Despawn3DDiceTimer.start()
@@ -79,7 +96,7 @@ func _on_player_diceroll(rolled_die_num_faces, dice_value):
 	
 	player.attack_anim()
 		
-	_spawn_3d_die()
+	_spawn_3d_die(rolled_die_num_faces)
 	var condition_passed = current_enemy.on_player_diceroll(dice_value);
 	if !condition_passed:
 		player_health -= 1;
