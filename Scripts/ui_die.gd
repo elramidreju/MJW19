@@ -37,6 +37,6 @@ func _roll_split() -> void:
 
 func _on_texture_button_pressed() -> void:
 	#if Input.is_action_just_pressed("LMouse"):
-	#	_roll_die()
+		_roll_die()
 	#if Input.is_action_just_pressed("RMouse"):
-		_roll_split()
+	#	_roll_split()

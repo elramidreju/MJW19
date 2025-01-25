@@ -3,6 +3,7 @@ extends Node
 @export var player_scene: PackedScene
 @export var enemy_scene: Array[PackedScene] = []
 @export var ui_die_scene: PackedScene
+@export var die_3d_scene: PackedScene
 @export var player_health: int
 
 var player: Node3D
@@ -59,7 +60,13 @@ func spawn_next_enemy() -> void:
 	current_enemy.transform = $Root3D/EnemyPlaceholder.transform
 	encounterCounter += 1
 	
+func _spawn_3d_die():
+	var new_3d_die:Node3D = die_3d_scene.instantiate() as Node3D
+	new_3d_die.global_position = $Root3D/Die3DSpawnPos.global_position
+	$Root3D.add_child(new_3d_die)
+	
 func _on_player_diceroll(dice_value):
+	_spawn_3d_die()
 	
 	if !$EnemySpawnTimer.is_stopped():
 		return
