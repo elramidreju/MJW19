@@ -16,6 +16,7 @@ var dice: Array[Node] = []
 func _ready() -> void:
 	
 	$Root3D/EnemyPlaceholder.visible = false
+	$Root3D/PlayerPlaceholder.visible = false
 	update_dice()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,6 +49,9 @@ func end_game() -> void:
 
 func spawn_player() -> void:
 	player = player_scene.instantiate()
+	get_node("Root3D").add_child(player)
+	player.transform = $Root3D/PlayerPlaceholder.transform
+	player.spawn_anim()
 	
 func spawn_next_enemy() -> void:
 	
@@ -62,18 +66,21 @@ func spawn_next_enemy() -> void:
 	
 func _spawn_3d_die():
 	var new_3d_die:Node3D = die_3d_scene.instantiate() as Node3D
-	new_3d_die.global_position = $Root3D/Die3DSpawnPos.global_position
 	$Root3D.add_child(new_3d_die)
+	new_3d_die.global_position = $Root3D/Die3DSpawnPos.global_position
 	
 func _on_player_diceroll(dice_value):
-	_spawn_3d_die()
-	return
 	if !$EnemySpawnTimer.is_stopped():
 		return
 	
+	player.attack_anim()
+		
+	_spawn_3d_die()
 	var condition_passed = current_enemy.on_player_diceroll(dice_value);
 	if !condition_passed:
 		player_health -= 1;
+		player.react_to_damage_anim()
+		player.eat_anim()
 
 	current_enemy.queue_free()
 	$EnemySpawnTimer.start()
