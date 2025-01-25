@@ -13,6 +13,18 @@ func _update_ui() -> void:
 func _ready() -> void:
 	_update_ui()
 
+func _handle_input() -> void:
+	var mouse_pos_viewport:Vector2 =  get_viewport().get_mouse_position()
+	
+	if mouse_pos_viewport.x >= global_position.x && mouse_pos_viewport.x <= global_position.x + get_size().x && mouse_pos_viewport.y >= global_position.y && mouse_pos_viewport.y <= global_position.y + get_size().y :
+		if Input.is_action_just_pressed("LMouse"):
+			_roll_die()
+		if Input.is_action_just_pressed("RMouse"):
+			_roll_split()
+
+func _process(delta: float) -> void:
+	_handle_input()	
+
 func _roll_die() -> void:
 	var roll_die_result = randi_range(1, faces)
 	on_playerdiceroll.emit(roll_die_result)
@@ -22,9 +34,6 @@ func _split_die()-> void:
 	_update_ui()
 	
 func _instantiate_half_die() -> void:
-	if faces <= 4:
-		return
-		
 	_split_die()
 	
 	var new_die_pos = Vector2(global_position.x, global_position.y) 
@@ -32,11 +41,6 @@ func _instantiate_half_die() -> void:
 	on_playerdicesplit.emit(new_die_pos, get_size(), faces)
 
 func _roll_split() -> void:
+	if faces <= 4:
+		return
 	_instantiate_half_die()
-	#_split_die()
-
-func _on_texture_button_pressed() -> void:
-	#if Input.is_action_just_pressed("LMouse"):
-		_roll_die()
-	#if Input.is_action_just_pressed("RMouse"):
-	#	_roll_split()
