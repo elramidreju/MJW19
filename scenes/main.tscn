@@ -1,7 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://t747cctvqypi"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r0c47"]
-[ext_resource type="PackedScene" uid="uid://b8tm182wgl0hu" path="res://scenes/enemy.tscn" id="2_gou3y"]
 [ext_resource type="PackedScene" uid="uid://dlga0qecmnc5d" path="res://scenes/player.tscn" id="2_matdk"]
 [ext_resource type="Texture2D" uid="uid://beqgm48w0mswq" path="res://granite.jpg" id="3_cpt02"]
 [ext_resource type="PackedScene" uid="uid://d27525cf1ywew" path="res://scenes/enemy_range.tscn" id="3_odqd2"]
@@ -9,14 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://cwlqsssnfmg71" path="res://scenes/enemy_morethan.tscn" id="5_lk0j8"]
 [ext_resource type="PackedScene" uid="uid://bx3v0fphb6k0q" path="res://scenes/die_3d.tscn" id="7_1poff"]
 [ext_resource type="PackedScene" uid="uid://dkauyvf72kbw7" path="res://scenes/ui_die.tscn" id="8_kx7os"]
-[ext_resource type="PackedScene" uid="uid://cii2bhfcsufbf" path="res://scenes/die_D8.tscn" id="9_pb0bb"]
-[ext_resource type="PackedScene" uid="uid://bemyewdxa7qu6" path="res://scenes/die_D6.tscn" id="10_jepdc"]
+[ext_resource type="Texture2D" uid="uid://nrjew8iv4ya4" path="res://art/UI/Mosquito vida llena.png" id="9_cpeq5"]
+[ext_resource type="Texture2D" uid="uid://q763c4unx664" path="res://art/UI/Mosquito vida vacia.png" id="10_nmfwh"]
 [ext_resource type="PackedScene" uid="uid://lehk4xls0fet" path="res://scenes/mosquitoe.tscn" id="11_4k0fp"]
-[ext_resource type="PackedScene" uid="uid://df21w8ia8gsk3" path="res://scenes/die_D4.tscn" id="11_6fjiy"]
 [ext_resource type="PackedScene" path="res://Scenes/surface_3d_dice.tscn" id="11_xvhqt"]
 [ext_resource type="Texture2D" uid="uid://bqhdu64a6821c" path="res://art/backgrounds/Fondo dados.png" id="12_a8uxi"]
-[ext_resource type="PackedScene" uid="uid://b7s031ptk10r4" path="res://scenes/die_D3.tscn" id="12_ay0jh"]
-[ext_resource type="PackedScene" path="res://scenes/animated_ui_dice_result_text.tscn" id="13_l55c5"]
+[ext_resource type="Texture2D" uid="uid://dhobadkgu4pnt" path="res://icon.svg" id="13_01faa"]
+[ext_resource type="PackedScene" uid="uid://dlatb8aso4231" path="res://scenes/animated_ui_dice_result_text.tscn" id="13_l55c5"]
+[ext_resource type="Texture2D" uid="uid://b3y0cqxwwimw5" path="res://art/characters/proto_player.png" id="14_lx06f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xhi71"]
 
@@ -27,6 +26,10 @@ sky_material = SubResource("ProceduralSkyMaterial_xhi71")
 background_mode = 2
 sky = SubResource("Sky_1wbys")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gg0w8"]
+albedo_color = Color(0.980789, 0.802796, 0.740801, 1)
+albedo_texture = ExtResource("3_cpt02")
+
 [node name="RootCanvas" type="CanvasLayer"]
 script = ExtResource("1_r0c47")
 player_scene = ExtResource("2_matdk")
@@ -34,13 +37,14 @@ enemy_scene = Array[PackedScene]([ExtResource("5_lk0j8"), ExtResource("4_oes5l")
 health_element = ExtResource("11_4k0fp")
 ui_die_scene = ExtResource("8_kx7os")
 die_3d_scene = ExtResource("7_1poff")
-die_D8 = ExtResource("9_pb0bb")
-die_D6 = ExtResource("10_jepdc")
-die_D4 = ExtResource("11_6fjiy")
-die_D3 = ExtResource("12_ay0jh")
 player_health = 2
+health_texture_filled = ExtResource("9_cpeq5")
+health_texture_empty = ExtResource("10_nmfwh")
 
 [node name="Root3D" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Root3D"]
+transform = Transform3D(0.738997, -0.580326, 0.342207, 0.111148, 0.606004, 0.787659, -0.664478, -0.544041, 0.512336, 0.0308409, 0.716756, -0.0600114)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Root3D"]
 environment = SubResource("Environment_glq3t")
@@ -56,18 +60,9 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Root3D/SubViewportContainer/SubViewport"]
 
-[node name="EnemyPlaceholder" parent="Root3D" instance=ExtResource("2_gou3y")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.059, 0.11, -1)
-visible = false
-script = null
-
-[node name="PlayerPlaceholder" parent="Root3D" instance=ExtResource("2_gou3y")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.874, 0.11, -1)
-visible = false
-script = null
-
 [node name="background" type="Sprite3D" parent="Root3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+visible = false
 pixel_size = 0.006
 render_priority = -2
 texture = ExtResource("3_cpt02")
@@ -76,12 +71,23 @@ texture = ExtResource("3_cpt02")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29073, 0.152667, -0.621595)
 flip_faces = true
 size = Vector3(1.98633, 1, 1.3439)
+material = SubResource("StandardMaterial3D_gg0w8")
 
 [node name="Spawned3DDice" type="Node3D" parent="Root3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699524, -0.0220105, -0.636196)
 
 [node name="Surface3DDice" parent="Root3D" instance=ExtResource("11_xvhqt")]
 transform = Transform3D(0.50139, 0, 0, 0, 0.501387, -0.00175018, 0, 0.00175018, 0.501387, 0.479163, -0.20876, -0.700743)
+visible = false
+
+[node name="EnemyPlaceholder" type="Sprite3D" parent="Root3D"]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, -0.132, -0.223207, -0.716)
+texture = ExtResource("13_01faa")
+
+[node name="PlayerPlaceholder" type="Sprite3D" parent="Root3D"]
+transform = Transform3D(0.107788, -0.000940648, 0.0219305, 0.000959919, 0.109996, 0, -0.0219296, 0.000191377, 0.107792, -0.567, -0.151, -0.771)
+pixel_size = 0.0025
+texture = ExtResource("14_lx06f")
 
 [node name="UIControl" type="Control" parent="."]
 top_level = true
@@ -91,7 +97,7 @@ anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="TextureRect" type="TextureRect" parent="UIControl"]
+[node name="DiceBoard" type="TextureRect" parent="UIControl"]
 clip_contents = true
 layout_mode = 0
 offset_right = 1920.0
@@ -119,10 +125,10 @@ offset_bottom = 0.0
 
 [node name="Mosquitoe_placeholder" parent="UIControl" instance=ExtResource("11_4k0fp")]
 layout_mode = 0
-offset_left = 37.0
-offset_top = 17.0
-offset_right = 387.0
-offset_bottom = 367.0
+offset_left = 1245.0
+offset_top = -68.0
+offset_right = 1595.0
+offset_bottom = 282.0
 
 [node name="StartTimer" type="Timer" parent="."]
 one_shot = true

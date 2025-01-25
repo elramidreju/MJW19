@@ -32,6 +32,7 @@ animations = [{
 }]
 
 [node name="Enemy" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84, 0)
 script = ExtResource("1_l835m")
 enemy_condition = 2
 condition_values = Array[int]([1])

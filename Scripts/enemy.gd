@@ -10,6 +10,12 @@ signal enemy_result(result:bool)
 var EnemySprite:AnimatedSprite3D
 var has_been_cleaned := false
 
+var initial_rotation
+var anim_scale := 0.25
+var anim_speed := 4
+
+var time := 0.0
+
 #SpriteAnimation2D
 #Some kind of text to show the probability
 #The condition should be set here, if, for the three
@@ -17,6 +23,8 @@ var has_been_cleaned := false
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
+	
+	initial_rotation = rotation
 	
 	EnemySprite = get_node("EnemySprite")
 	EnemySprite.play("idle")
@@ -37,7 +45,19 @@ func update_name() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	update_anim(_delta)
+
+func update_anim(_delta):
+	
+	time += _delta
+	var rocking = sin(time * anim_speed) * anim_scale
+	var waving = cos(time * anim_speed) * anim_scale
+	
+	rotation = Vector3(initial_rotation.x, 0.0, initial_rotation.z + rocking)
+	#rotation = Vector3(initial_rotation.x, rotation.y + cos(_delta), initial_rotation.z)
+	
+	
+
 
 func on_player_diceroll(die_value) -> bool:
 	var condition_met := false
