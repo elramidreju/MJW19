@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://t747cctvqypi"]
+[gd_scene load_steps=13 format=3 uid="uid://t747cctvqypi"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r0c47"]
 [ext_resource type="PackedScene" uid="uid://b8tm182wgl0hu" path="res://scenes/enemy.tscn" id="2_gou3y"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d27525cf1ywew" path="res://scenes/enemy_range.tscn" id="3_odqd2"]
 [ext_resource type="PackedScene" uid="uid://dql3v2r7wgc1n" path="res://scenes/enemy_odd.tscn" id="4_oes5l"]
 [ext_resource type="PackedScene" uid="uid://cwlqsssnfmg71" path="res://scenes/enemy_morethan.tscn" id="5_lk0j8"]
+[ext_resource type="Texture2D" uid="uid://geulkxdaf712" path="res://granite_board.png" id="8_i5mdc"]
 [ext_resource type="PackedScene" uid="uid://dkauyvf72kbw7" path="res://scenes/ui_die.tscn" id="8_kx7os"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xhi71"]
@@ -41,31 +42,53 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="Root3D/SubViewportContainer/SubViewport"]
 
 [node name="EnemyPlaceholder" parent="Root3D" instance=ExtResource("2_gou3y")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.741, 0.36, -1)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.059, 0.11, -1)
+script = null
+
+[node name="Player" parent="Root3D" instance=ExtResource("2_matdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.815, 0, 0)
+
+[node name="PlayerPlaceholder" parent="Root3D/Player" instance=ExtResource("2_gou3y")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.059, 0.11, -1)
+script = null
 
 [node name="background" type="Sprite3D" parent="Root3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 pixel_size = 0.006
-fixed_size = true
-render_priority = -1
+render_priority = -2
 texture = ExtResource("3_cpt02")
 
+[node name="CSGBox3D" type="CSGBox3D" parent="Root3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29073, 0.152667, -0.621595)
+flip_faces = true
+size = Vector3(1.98633, 1, 1.3439)
+
 [node name="UIControl" type="Control" parent="."]
+top_level = true
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+
+[node name="TextureRect" type="TextureRect" parent="UIControl"]
+layout_mode = 0
+offset_right = 1919.0
+offset_bottom = 1085.0
+texture = ExtResource("8_i5mdc")
 
 [node name="Die" parent="UIControl" instance=ExtResource("8_kx7os")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
-offset_top = -230.0
-offset_right = 250.0
-offset_bottom = -30.0
+offset_left = 1444.0
+offset_top = -392.0
+offset_right = 1694.0
+offset_bottom = -192.0
 grow_horizontal = 1
 grow_vertical = 0
+faces = 6
 
 [node name="StartTimer" type="Timer" parent="."]
 one_shot = true
