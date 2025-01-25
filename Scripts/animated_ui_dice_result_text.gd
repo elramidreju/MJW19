@@ -10,6 +10,9 @@ func _enable() -> void:
 
 func _ready() -> void:
 	_disable()
+	
+func set_label_text(text):
+	$Label.text = text	
 
 func _start_size_anim() -> void:
 	_enable()

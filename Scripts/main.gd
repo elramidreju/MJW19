@@ -10,6 +10,8 @@ extends Node
 @export var die_D4: PackedScene
 @export var die_D3: PackedScene
 @export var player_health: int
+@export var health_texture_filled: Texture
+@export var health_texture_empty: Texture
 
 var player: Node3D
 var current_enemy: Node3D
@@ -17,6 +19,7 @@ var allowInput: bool = false
 var encounterCounter: int = 0
 var dice: Array[Node] = []
 var health_elements: Array[Node] = []
+var enemy_condition_passed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,6 +69,9 @@ func spawn_next_enemy() -> void:
 		end_game()
 		return
 	
+	if current_enemy != null:	
+		current_enemy.queue_free()
+	
 	current_enemy = enemy_scene[encounterCounter].instantiate()
 	get_node("Root3D").add_child(current_enemy)
 	current_enemy.transform = $Root3D/EnemyPlaceholder.transform
@@ -106,7 +112,8 @@ func _on_player_diceroll(rolled_die_num_faces, dice_value):
 	
 	if(player_health == 0):
 		end_game()
-
+	get_node("UIControl/AnimatedDiceResultText/Label").text = str(dice_value)
+	var enemy_condition_passed = current_enemy.on_player_diceroll(dice_value);
 	current_enemy.queue_free()
 	#$EnemySpawnTimer.start()
 
@@ -129,14 +136,15 @@ func update_life():
 			get_node("UIControl").add_child(new_element)
 			new_element.global_position = $UIControl/Mosquitoe_placeholder.global_position
 			new_element.global_position.x += 200.0 * i
+			new_element.texture = health_texture_filled
 			health_elements.push_back(new_element)
 	
 	var counter = 1
 	for health_ui in health_elements:
 		if(counter <= player_health):
-			health_ui.visible = true
+			health_ui.texture = health_texture_filled
 		else:
-			health_ui.visible = false
+			health_ui.texture = health_texture_empty
 		counter+=1
 
 func _on_despawn_rolled_dice_timer_timeout() -> void:
@@ -151,4 +159,14 @@ func _on_despawn_3d_dice_timer_timeout() -> void:
 	$UIControl/AnimatedDiceResultText._start_size_anim()
 
 func _on_animation_player_animation_finished() -> void:
-	spawn_next_enemy()
+	if !enemy_condition_passed:
+		player_health -= 1;
+		player.react_to_damage_anim()
+		player.eat_anim()
+		update_life()
+	
+	if(player_health == 0):
+		end_game()
+	#spawn_next_enemy()
+
+	$EnemySpawnTimer.start()
