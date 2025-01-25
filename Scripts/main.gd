@@ -13,12 +13,8 @@ var dice: Array[Node] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	dice = find_children("*", "UIDie");
-	
-	for die in dice:
-		#die.on_playerdiceroll.connect(_onplayerdiceroll)
-		pass
-
+	$Root3D/EnemyPlaceholder.visible = false
+	update_dice()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -31,24 +27,48 @@ func _on_player_spawn_timer_timeout() -> void:
 	spawn_player()
 
 func _on_enemy_spawn_timer_timeout() -> void:
-	spawn_next_enemy
+	spawn_next_enemy()
+
+func update_dice() -> void:
+	dice = find_children("*", "UI_Die");
+	for die in dice:
+		die.on_playerdiceroll.connect(_on_player_diceroll)
+		#die._on_split_die.connect(_on_split_die)
+
 
 func new_game() -> void:
 	print("Starting new game!")
 	$PlayerSpawnTimer.start()
+	$EnemySpawnTimer.start()
+
+func end_game() -> void:
+	print("Ending the game")
 
 func spawn_player() -> void:
 	player = player_scene.instantiate()
 	
 func spawn_next_enemy() -> void:
+	
+	if encounterCounter == enemy_scene.size():
+		end_game()
+		return
+	
 	current_enemy = enemy_scene[encounterCounter].instantiate()
+	get_node("Root3D").add_child(current_enemy)
+	current_enemy.transform = $Root3D/EnemyPlaceholder.transform
 	encounterCounter += 1
 	
 func _on_player_diceroll(dice_value):
-	# next enemy spawn
+	
+	if !$EnemySpawnTimer.is_stopped():
+		return
+	
 	var condition_passed = current_enemy.on_player_diceroll(dice_value);
 	if !condition_passed:
 		player_health -= 1;
 
 	current_enemy.queue_free()
 	$EnemySpawnTimer.start()
+
+func _on_split_die():
+	update_dice()

@@ -19,6 +19,3 @@ region_rect = Rect2(0, 0, 500, 2176.52)
 [node name="EnemyLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 text = "lorem ipsum"
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
