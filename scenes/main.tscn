@@ -1,16 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://t747cctvqypi"]
+[gd_scene load_steps=17 format=3 uid="uid://t747cctvqypi"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r0c47"]
-[ext_resource type="PackedScene" uid="uid://b8tm182wgl0hu" path="res://scenes/enemy.tscn" id="2_gou3y"]
-[ext_resource type="PackedScene" uid="uid://dlga0qecmnc5d" path="res://scenes/player.tscn" id="2_matdk"]
+[ext_resource type="PackedScene" uid="uid://b8tm182wgl0hu" path="res://Scenes/enemy.tscn" id="2_gou3y"]
+[ext_resource type="PackedScene" uid="uid://dlga0qecmnc5d" path="res://Scenes/player.tscn" id="2_matdk"]
 [ext_resource type="Texture2D" uid="uid://beqgm48w0mswq" path="res://granite.jpg" id="3_cpt02"]
-[ext_resource type="PackedScene" uid="uid://d27525cf1ywew" path="res://scenes/enemy_range.tscn" id="3_odqd2"]
-[ext_resource type="PackedScene" uid="uid://dql3v2r7wgc1n" path="res://scenes/enemy_odd.tscn" id="4_oes5l"]
-[ext_resource type="PackedScene" uid="uid://cwlqsssnfmg71" path="res://scenes/enemy_morethan.tscn" id="5_lk0j8"]
-[ext_resource type="PackedScene" path="res://scenes/die_3d.tscn" id="7_1poff"]
+[ext_resource type="PackedScene" uid="uid://d27525cf1ywew" path="res://Scenes/enemy_range.tscn" id="3_odqd2"]
+[ext_resource type="PackedScene" uid="uid://dql3v2r7wgc1n" path="res://Scenes/enemy_odd.tscn" id="4_oes5l"]
+[ext_resource type="PackedScene" uid="uid://cwlqsssnfmg71" path="res://Scenes/enemy_morethan.tscn" id="5_lk0j8"]
+[ext_resource type="PackedScene" uid="uid://bx3v0fphb6k0q" path="res://scenes/die_3d.tscn" id="7_1poff"]
 [ext_resource type="Texture2D" uid="uid://geulkxdaf712" path="res://granite_board.png" id="8_i5mdc"]
-[ext_resource type="PackedScene" uid="uid://dkauyvf72kbw7" path="res://scenes/ui_die.tscn" id="8_kx7os"]
-[ext_resource type="PackedScene" uid="uid://lehk4xls0fet" path="res://scenes/mosquitoe.tscn" id="11_4k0fp"]
+[ext_resource type="PackedScene" uid="uid://dkauyvf72kbw7" path="res://Scenes/ui_die.tscn" id="8_kx7os"]
+[ext_resource type="PackedScene" uid="uid://lehk4xls0fet" path="res://Scenes/mosquitoe.tscn" id="11_4k0fp"]
+[ext_resource type="PackedScene" uid="uid://mdjs78ro6gao" path="res://Scenes/surface_3d_dice.tscn" id="11_xvhqt"]
+[ext_resource type="PackedScene" uid="uid://d3sbrrk1un8jy" path="res://Scenes/animated_ui_dice_result_text.tscn" id="13_l55c5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xhi71"]
 
@@ -65,7 +67,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29073, 0.152667, -0.621595
 flip_faces = true
 size = Vector3(1.98633, 1, 1.3439)
 
-[node name="Die3DSpawnPos" type="Node3D" parent="Root3D"]
+[node name="Spawned3DDice" type="Node3D" parent="Root3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699524, -0.0220105, -0.636196)
+
+[node name="Surface3DDice" parent="Root3D" instance=ExtResource("11_xvhqt")]
+transform = Transform3D(0.50139, 0, 0, 0, 0.501387, -0.00175018, 0, 0.00175018, 0.501387, 0.479163, -0.20876, -0.700743)
 
 [node name="UIControl" type="Control" parent="."]
 top_level = true
@@ -76,6 +82,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="TextureRect" type="TextureRect" parent="UIControl"]
+visible = false
 layout_mode = 0
 offset_right = 1919.0
 offset_bottom = 1085.0
@@ -101,6 +108,11 @@ offset_top = 866.0
 offset_right = 271.0
 offset_bottom = 980.0
 
+[node name="AnimatedDiceResultText" parent="UIControl" instance=ExtResource("13_l55c5")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
 [node name="StartTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
@@ -113,6 +125,10 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="Despawn3DDiceTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="PlayerSpawnTimer" to="." method="_on_player_spawn_timer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="Despawn3DDiceTimer" to="." method="_on_despawn_3d_dice_timer_timeout"]

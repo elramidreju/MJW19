@@ -16,7 +16,7 @@ var health_elements: Array[Node] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	$UIControl/AnimatedDiceResultText.on_dice_result_text_anim_finished.connect(_on_animation_player_animation_finished)
 	$Root3D/EnemyPlaceholder.visible = false
 	$Root3D/PlayerPlaceholder.visible = false
 	$UIControl/Mosquitoe_placeholder.visible = false
@@ -41,7 +41,6 @@ func update_dice() -> void:
 	for die in dice:
 		die.on_playerdiceroll.connect(_on_player_diceroll)
 		die.on_playerdicesplit.connect(_on_player_dicesplit)
-
 
 func new_game() -> void:
 	print("Starting new game!")
@@ -70,8 +69,9 @@ func spawn_next_enemy() -> void:
 	
 func _spawn_3d_die():
 	var new_3d_die:Node3D = die_3d_scene.instantiate() as Node3D
-	$Root3D.add_child(new_3d_die)
-	new_3d_die.global_position = $Root3D/Die3DSpawnPos.global_position
+	$Root3D/Spawned3DDice.add_child(new_3d_die)
+	new_3d_die.global_position = $Root3D/Spawned3DDice.global_position
+	$Despawn3DDiceTimer.start()
 	
 func _on_player_diceroll(dice_value):
 	if !$EnemySpawnTimer.is_stopped():
@@ -122,3 +122,18 @@ func update_life():
 		else:
 			health_ui.visible = false
 		counter+=1
+
+func _on_despawn_rolled_dice_timer_timeout() -> void:
+	var rolled_dice = $Root3D/Spawned3DDice.get_children()
+	for die in rolled_dice:
+		die.queue_free()
+
+func _on_despawn_3d_dice_timer_timeout() -> void:
+	var rolled_dice = $Root3D/Spawned3DDice.get_children()
+	for die in rolled_dice:
+		die.queue_free()
+	$UIControl/AnimatedDiceResultText._start_size_anim()
+
+func _on_animation_player_animation_finished() -> void:
+	var test:int = 0
+	pass

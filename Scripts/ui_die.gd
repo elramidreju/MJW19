@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 func _roll_die() -> void:
 	var roll_die_result = randi_range(1, faces)
 	on_playerdiceroll.emit(roll_die_result)
+	queue_free()
 
 func _split_die()-> void:
 	faces = faces/2
