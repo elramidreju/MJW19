@@ -2,6 +2,7 @@ extends Node
 
 @export var player_scene: PackedScene
 @export var enemy_scene: Array[PackedScene] = []
+@export var health_element: PackedScene
 @export var ui_die_scene: PackedScene
 @export var die_3d_scene: PackedScene
 @export var player_health: int
@@ -11,13 +12,16 @@ var current_enemy: Node3D
 var allowInput: bool = false
 var encounterCounter: int = 0
 var dice: Array[Node] = []
+var health_elements: Array[Node] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	$Root3D/EnemyPlaceholder.visible = false
 	$Root3D/PlayerPlaceholder.visible = false
+	$UIControl/Mosquitoe_placeholder.visible = false
 	update_dice()
+	update_life()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -81,6 +85,10 @@ func _on_player_diceroll(dice_value):
 		player_health -= 1;
 		player.react_to_damage_anim()
 		player.eat_anim()
+		update_life()
+	
+	if(player_health == 0):
+		end_game()
 
 	current_enemy.queue_free()
 	$EnemySpawnTimer.start()
@@ -96,3 +104,21 @@ func _on_player_dicesplit(new_die_pos:Vector2, new_die_size:Vector2, new_die_fac
 
 func _on_split_die():
 	update_dice()
+	
+func update_life():
+	
+	if health_elements.size() == 0:
+		for i in 3:
+			var new_element = health_element.instantiate()
+			get_node("UIControl").add_child(new_element)
+			new_element.global_position = $UIControl/Mosquitoe_placeholder.global_position
+			new_element.global_position.x += 150.0 * i
+			health_elements.push_back(new_element)
+	
+	var counter = 1
+	for health_ui in health_elements:
+		if(counter <= player_health):
+			health_ui.visible = true
+		else:
+			health_ui.visible = false
+		counter+=1

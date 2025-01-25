@@ -1,82 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbqatqf2hacl7"]
+[gd_scene load_steps=2 format=3 uid="uid://lehk4xls0fet"]
 
 [ext_resource type="Texture2D" uid="uid://dhobadkgu4pnt" path="res://icon.svg" id="1_wmw84"]
 
-[sub_resource type="Animation" id="Animation_8m26k"]
-resource_name = "float_around"
-length = 4.0
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array()
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite3D:flip_h")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_m6naw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vk7gc"]
-_data = {
-"RESET": SubResource("Animation_m6naw"),
-"float_around": SubResource("Animation_8m26k")
-}
-
-[node name="Mosquitoe" type="Node3D"]
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Mosquitoe" type="TextureRect"]
+offset_left = 80.0
+offset_top = 480.0
+offset_right = 172.0
+offset_bottom = 572.0
 texture = ExtResource("1_wmw84")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_vk7gc")
-}
-autoplay = "float_around"
+expand_mode = 1
