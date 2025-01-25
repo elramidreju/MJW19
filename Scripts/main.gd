@@ -8,10 +8,17 @@ var player: Node3D
 var current_enemy: Node3D
 var allowInput: bool = false
 var encounterCounter: int = 0
+var dice: Array[Node] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	
+	dice = find_children("*", "UIDie");
+	
+	for die in dice:
+		#die.on_playerdiceroll.connect(_onplayerdiceroll)
+		pass
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
