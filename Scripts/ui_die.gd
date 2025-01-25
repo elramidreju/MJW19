@@ -4,7 +4,7 @@ extends Control
 
 @export var faces:int = 0
 
-signal on_playerdiceroll(roll_die_result)
+signal on_playerdiceroll(rolled_die_num_faces, roll_die_result)
 signal on_playerdicesplit(new_die_pos, new_die_size, new_die_faces_num)
 
 func _update_ui() -> void:
@@ -15,7 +15,6 @@ func _ready() -> void:
 
 func _handle_input() -> void:
 	var mouse_pos_viewport:Vector2 =  get_viewport().get_mouse_position()
-	
 	if mouse_pos_viewport.x >= global_position.x && mouse_pos_viewport.x <= global_position.x + get_size().x && mouse_pos_viewport.y >= global_position.y && mouse_pos_viewport.y <= global_position.y + get_size().y :
 		if Input.is_action_just_pressed("LMouse"):
 			_roll_die()
@@ -27,7 +26,7 @@ func _process(delta: float) -> void:
 
 func _roll_die() -> void:
 	var roll_die_result = randi_range(1, faces)
-	on_playerdiceroll.emit(roll_die_result)
+	on_playerdiceroll.emit(faces, roll_die_result)
 	queue_free()
 
 func _split_die()-> void:

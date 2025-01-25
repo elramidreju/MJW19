@@ -73,7 +73,7 @@ func _spawn_3d_die():
 	new_3d_die.global_position = $Root3D/Spawned3DDice.global_position
 	$Despawn3DDiceTimer.start()
 	
-func _on_player_diceroll(dice_value):
+func _on_player_diceroll(rolled_die_num_faces, dice_value):
 	if !$EnemySpawnTimer.is_stopped():
 		return
 	
@@ -101,10 +101,9 @@ func _on_player_dicesplit(new_die_pos:Vector2, new_die_size:Vector2, new_die_fac
 	new_die.global_position.x = new_die_pos.x
 	new_die.global_position.y = new_die_pos.y
 	new_die.set_size(new_die_size)
+	new_die.on_playerdiceroll.connect(_on_player_diceroll)
+	new_die.on_playerdicesplit.connect(_on_player_dicesplit)
 
-func _on_split_die():
-	update_dice()
-	
 func update_life():
 	
 	if health_elements.size() == 0:
