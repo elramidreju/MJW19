@@ -67,7 +67,7 @@ func _spawn_3d_die():
 	
 func _on_player_diceroll(dice_value):
 	_spawn_3d_die()
-	
+	return
 	if !$EnemySpawnTimer.is_stopped():
 		return
 	
