@@ -4,3 +4,5 @@
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_6rvih")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]

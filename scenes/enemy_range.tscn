@@ -1,22 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8tm182wgl0hu"]
+[gd_scene load_steps=3 format=3 uid="uid://d27525cf1ywew"]
 
-[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_ee1ue"]
-[ext_resource type="Texture2D" uid="uid://62kou76jb74k" path="res://enemy_placeholder_anim.png" id="2_1c8im"]
+[ext_resource type="Script" path="res://scritps/enemy.gd" id="1_pl12g"]
+[ext_resource type="Texture2D" uid="uid://62kou76jb74k" path="res://enemy_placeholder_anim.png" id="2_haqxt"]
 
 [node name="Enemy" type="Node3D"]
-script = ExtResource("1_ee1ue")
+script = ExtResource("1_pl12g")
 enemy_condition = 1
 condition_values = Array[int]([3, 5])
 
 [node name="EnemySprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
-texture = ExtResource("2_1c8im")
+texture = ExtResource("2_haqxt")
 vframes = 4
+frame = 3
 region_enabled = true
 region_rect = Rect2(0, 0, 500, 2176.52)
 
 [node name="EnemyLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000129223, 0.804738, 0.000403225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 text = "lorem ipsum"
 
 [node name="Camera3D" type="Camera3D" parent="."]
