@@ -4,8 +4,13 @@ extends Control
 
 @export var faces:int = 0
 
-signal on_playerdiceroll(rolled_die_num_faces, roll_die_result)
+var input_enabled:bool = true
+
+signal on_playerdiceroll(rolled_die, roll_die_result)
 signal on_playerdicesplit(new_die_pos, new_die_size, new_die_faces_num)
+
+func _set_input_enabled(new_value:bool) -> void:
+	input_enabled = new_value
 
 func _update_ui() -> void:
 	$Label.text = "D" + str(faces)
@@ -15,7 +20,7 @@ func _ready() -> void:
 
 func _handle_input() -> void:
 	var mouse_pos_viewport:Vector2 =  get_viewport().get_mouse_position()
-	if mouse_pos_viewport.x >= global_position.x && mouse_pos_viewport.x <= global_position.x + get_size().x && mouse_pos_viewport.y >= global_position.y && mouse_pos_viewport.y <= global_position.y + get_size().y :
+	if input_enabled && mouse_pos_viewport.x >= global_position.x && mouse_pos_viewport.x <= global_position.x + get_size().x && mouse_pos_viewport.y >= global_position.y && mouse_pos_viewport.y <= global_position.y + get_size().y :
 		if Input.is_action_just_pressed("LMouse"):
 			_roll_die()
 		if Input.is_action_just_pressed("RMouse"):
@@ -26,8 +31,7 @@ func _process(delta: float) -> void:
 
 func _roll_die() -> void:
 	var roll_die_result = randi_range(1, faces)
-	on_playerdiceroll.emit(faces, roll_die_result)
-	queue_free()
+	on_playerdiceroll.emit(self, roll_die_result)
 
 func _split_die()-> void:
 	faces = faces/2
