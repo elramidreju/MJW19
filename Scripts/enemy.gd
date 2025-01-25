@@ -7,6 +7,8 @@ enum EnemyType {MoreThan, Ranged, Odd}
 @export var condition_values: Array[int] = []
 
 signal enemy_result(result:bool)
+var EnemySprite:AnimatedSprite3D
+var has_been_cleaned := false
 
 #SpriteAnimation2D
 #Some kind of text to show the probability
@@ -16,7 +18,8 @@ signal enemy_result(result:bool)
 
 func _ready() -> void:
 	
-	#get_node("TestSignal").on_player_diceroll.connect(_on_player_diceroll)
+	EnemySprite = get_node("EnemySprite")
+	EnemySprite.play("idle")
 	
 	if condition_values.size() == 0:
 		pass
@@ -46,6 +49,18 @@ func on_player_diceroll(die_value) -> bool:
 	if enemy_condition == EnemyType.Odd && die_value % 2 == 1: 
 		condition_met = true;
 	
+	if condition_met:
+		has_been_cleaned = true
+		EnemySprite.play("cleaned")
+	else:
+		EnemySprite.play("attacking")
+		
 	return condition_met
 	enemy_result.emit(condition_met)
-	#print("%s" % condition_met)
+
+func _animation_finished():
+	if has_been_cleaned:
+		EnemySprite.play("cleaned")
+	else:
+		EnemySprite.play("idle")		
+	

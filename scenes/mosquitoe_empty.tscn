@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://eam7t2bofowc"]
+
+[ext_resource type="Texture2D" uid="uid://q763c4unx664" path="res://art/UI/Mosquito vida vacia.png" id="1_mrcgc"]
+
+[node name="Mosquitoe" type="TextureRect"]
+offset_left = 80.0
+offset_top = 480.0
+offset_right = 172.0
+offset_bottom = 572.0
+texture = ExtResource("1_mrcgc")
+expand_mode = 1

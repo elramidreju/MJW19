@@ -1,19 +1,59 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8tm182wgl0hu"]
+[gd_scene load_steps=7 format=3 uid="uid://b8tm182wgl0hu"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_ee1ue"]
 [ext_resource type="Texture2D" uid="uid://62kou76jb74k" path="res://enemy_placeholder_anim.png" id="2_1c8im"]
+[ext_resource type="Texture2D" uid="uid://bv3ms4f1i4r8x" path="res://enemy_placeholder.png" id="2_1eel0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3id1n"]
+atlas = ExtResource("2_1c8im")
+region = Rect2(0, 0, 500, 547)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6xho"]
+atlas = ExtResource("2_1c8im")
+region = Rect2(0, 547, 500, 547)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_keunq"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_3id1n")
+}, {
+"duration": 16.0,
+"texture": ExtResource("2_1eel0")
+}],
+"loop": false,
+"name": &"attacking",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_q6xho")
+}],
+"loop": false,
+"name": &"cleaned",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3id1n")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 30.0
+}]
 
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_ee1ue")
 enemy_condition = 1
 condition_values = Array[int]([3, 5])
 
-[node name="EnemySprite" type="Sprite3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
-texture = ExtResource("2_1c8im")
-vframes = 4
-region_enabled = true
-region_rect = Rect2(0, 0, 500, 2176.52)
+[node name="EnemySprite" type="AnimatedSprite3D" parent="."]
+sprite_frames = SubResource("SpriteFrames_keunq")
+animation = &"attacking"
+
+[node name="EnemySprite" type="AnimatedSprite3D" parent="EnemySprite"]
+sprite_frames = SubResource("SpriteFrames_keunq")
+animation = &"attacking"
 
 [node name="EnemyLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000129223, 0.804738, 0.000403225)

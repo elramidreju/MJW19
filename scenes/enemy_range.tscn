@@ -1,21 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://d27525cf1ywew"]
+[gd_scene load_steps=5 format=3 uid="uid://d27525cf1ywew"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_pl12g"]
-[ext_resource type="Texture2D" uid="uid://62kou76jb74k" path="res://enemy_placeholder_anim.png" id="2_haqxt"]
+[ext_resource type="Texture2D" uid="uid://cxx64geutkwdq" path="res://art/characters/Enemigo3_sucio.png" id="2_248s8"]
+[ext_resource type="Texture2D" uid="uid://bywr00ulypbqm" path="res://art/characters/Enemigo3_limpio.png" id="3_sakm8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mdq4m"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": ExtResource("2_248s8")
+}],
+"loop": false,
+"name": &"attacking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": ExtResource("3_sakm8")
+}],
+"loop": false,
+"name": &"cleaned",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_248s8")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_pl12g")
 enemy_condition = 1
 condition_values = Array[int]([3, 5])
 
-[node name="EnemySprite" type="Sprite3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
-texture = ExtResource("2_haqxt")
-vframes = 4
-frame = 3
-region_enabled = true
-region_rect = Rect2(0, 0, 500, 2176.52)
-
 [node name="EnemyLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.378, 0)
+pixel_size = 0.008
 text = "lorem ipsum"
+
+[node name="EnemySprite" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.0015
+sprite_frames = SubResource("SpriteFrames_mdq4m")
+animation = &"attacking"

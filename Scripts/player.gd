@@ -2,6 +2,8 @@ extends Node3D
 
 var player_sprite = AnimatedSprite3D
 
+var AnimationsToPlay : Array[String] = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#player_sprite = get_node("AnimatedSprite3D")
@@ -13,13 +15,20 @@ func _process(delta: float) -> void:
 	pass
 
 func _animation_finished():
-	$AnimatedSprite3D.play("idle")
+	if AnimationsToPlay.size() == 0:
+		$AnimatedSprite3D.play("idle")
+	else:
+		$AnimatedSprite3D.play(AnimationsToPlay.pop_front())
+	
 	
 func eat_anim():
-	$AnimatedSprite3D.play("eat")
+	add_anim_to_queue("eat")
 func attack_anim():
-	$AnimatedSprite3D.play("attack")
+	add_anim_to_queue("attack")
 func react_to_damage_anim():
-	$AnimatedSprite3D.play("react_to_damage")
+	add_anim_to_queue("react_to_damage")
 func spawn_anim():
-	$AnimatedSprite3D.play("spawn")
+	add_anim_to_queue("spawn")
+	
+func add_anim_to_queue(anim_name):
+	AnimationsToPlay.push_back(anim_name)

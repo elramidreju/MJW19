@@ -91,7 +91,7 @@ func _on_player_diceroll(dice_value):
 		end_game()
 
 	current_enemy.queue_free()
-	$EnemySpawnTimer.start()
+	#$EnemySpawnTimer.start()
 
 func _on_player_dicesplit(new_die_pos:Vector2, new_die_size:Vector2, new_die_faces_num:int) -> void:
 	var new_die:UI_Die = ui_die_scene.instantiate() as UI_Die
@@ -112,7 +112,7 @@ func update_life():
 			var new_element = health_element.instantiate()
 			get_node("UIControl").add_child(new_element)
 			new_element.global_position = $UIControl/Mosquitoe_placeholder.global_position
-			new_element.global_position.x += 150.0 * i
+			new_element.global_position.x += 200.0 * i
 			health_elements.push_back(new_element)
 	
 	var counter = 1
@@ -135,5 +135,4 @@ func _on_despawn_3d_dice_timer_timeout() -> void:
 	$UIControl/AnimatedDiceResultText._start_size_anim()
 
 func _on_animation_player_animation_finished() -> void:
-	var test:int = 0
-	pass
+	spawn_next_enemy()

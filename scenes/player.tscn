@@ -1,23 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://dlga0qecmnc5d"]
+[gd_scene load_steps=9 format=3 uid="uid://dlga0qecmnc5d"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6rvih"]
-[ext_resource type="Texture2D" uid="uid://dhobadkgu4pnt" path="res://icon.svg" id="2_xjuek"]
-[ext_resource type="Texture2D" uid="uid://bv3ms4f1i4r8x" path="res://enemy_placeholder.png" id="3_gwcsx"]
+[ext_resource type="Texture2D" uid="uid://b3y0cqxwwimw5" path="res://art/characters/proto_player.png" id="3_6r3gy"]
 [ext_resource type="Texture2D" uid="uid://62kou76jb74k" path="res://enemy_placeholder_anim.png" id="4_8vycb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w4g64"]
-atlas = ExtResource("4_8vycb")
-region = Rect2(0, 0, 500, 547)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xqc6j"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ms1h"]
 atlas = ExtResource("4_8vycb")
 region = Rect2(0, 1641, 500, 547)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1y020"]
-atlas = ExtResource("4_8vycb")
-region = Rect2(0, 0, 500, 547)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2cae8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn1hc"]
 atlas = ExtResource("4_8vycb")
 region = Rect2(0, 1094, 500, 547)
 
@@ -32,43 +23,28 @@ region = Rect2(0, 1094, 500, 547)
 [sub_resource type="SpriteFrames" id="SpriteFrames_h8gv3"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_xjuek")
-}, {
-"duration": 5.0,
-"texture": ExtResource("3_gwcsx")
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_5ms1h")
 }],
 "loop": false,
 "name": &"attack",
-"speed": 5.0
+"speed": 30.0
 }, {
 "frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_w4g64")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_xqc6j")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_w4g64")
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_jn1hc")
 }],
 "loop": false,
 "name": &"eat",
-"speed": 5.0
+"speed": 30.0
 }, {
 "frames": [{
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_1y020")
-}, {
-"duration": 5.0,
-"texture": ExtResource("2_xjuek")
-}, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2cae8")
+"texture": ExtResource("3_6r3gy")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
-"speed": 5.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 5.0,
@@ -76,18 +52,19 @@ animations = [{
 }],
 "loop": false,
 "name": &"react_to_damage",
-"speed": 5.0
+"speed": 30.0
 }, {
 "frames": [{
-"duration": 10.0,
+"duration": 20.0,
 "texture": SubResource("AtlasTexture_kqcj7")
 }],
 "loop": false,
 "name": &"spawn",
-"speed": 5.0
+"speed": 30.0
 }]
 
 [node name="Player" type="Node3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_6rvih")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
@@ -95,6 +72,3 @@ pixel_size = 0.005
 sprite_frames = SubResource("SpriteFrames_h8gv3")
 animation = &"idle"
 autoplay = "idle"
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.36359)
