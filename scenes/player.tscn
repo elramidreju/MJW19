@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlga0qecmnc5d"]
+[gd_scene load_steps=11 format=3 uid="uid://dlga0qecmnc5d"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6rvih"]
+[ext_resource type="Texture2D" uid="uid://ulg7v67wds4b" path="res://art/UI/Pompa explotando.png" id="2_x7410"]
 [ext_resource type="Texture2D" uid="uid://b3y0cqxwwimw5" path="res://art/characters/proto_player.png" id="3_6r3gy"]
+[ext_resource type="Texture2D" uid="uid://1ehksu2pr6i8" path="res://art/UI/Pompa 2.png" id="3_qviv4"]
+[ext_resource type="Texture2D" uid="uid://cq8vitu32fh4j" path="res://art/UI/Pompa 3.png" id="4_bx7t7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h8gv3"]
 animations = [{
@@ -34,12 +37,57 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uacon"]
+angle_min = 132.4
+angle_max = 206.9
+initial_velocity_min = 0.25
+initial_velocity_max = 0.75
+gravity = Vector3(0, 1, 0)
+turbulence_noise_strength = 2.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jrmqx"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.556863)
+albedo_texture = ExtResource("3_qviv4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_6hv3n"]
+material = SubResource("StandardMaterial3D_jrmqx")
+
+[sub_resource type="Skin" id="Skin_a3qv2"]
+
 [node name="Player" type="Node3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.55309, 0)
 script = ExtResource("1_6rvih")
+exploded_bubble = ExtResource("2_x7410")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.0025
 sprite_frames = SubResource("SpriteFrames_h8gv3")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1, 1.1675, 1.93391, 0)
+amount = 71
+amount_ratio = 0.1
+lifetime = 10.0
+randomness = 0.1
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_uacon")
+draw_pass_1 = SubResource("QuadMesh_6hv3n")
+draw_skin = SubResource("Skin_a3qv2")
+
+[node name="BubbleSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 1.02825, 2.18169, 0)
+texture = ExtResource("3_qviv4")
+
+[node name="Placeholder" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 4.84195, -0.378584, 0)
+visible = false
+texture = ExtResource("4_bx7t7")
+
+[node name="BubbleAttackTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="BubbleAttackTimer" to="." method="_on_bubble_attack_timer_timeout"]

@@ -71,17 +71,9 @@ func spawn_player() -> void:
 	
 func spawn_next_enemy() -> void:
 	
-	if encounterCounter == enemy_scene.size():
-		end_game()
-		return
-	
-	if current_enemy != null:	
-		current_enemy.queue_free()
-	
 	current_enemy = enemy_scene[encounterCounter].instantiate()
 	get_node("Root3D").add_child(current_enemy)
 	current_enemy.transform = $Root3D/EnemyPlaceholder.transform
-	encounterCounter += 1
 	
 	_enable_disable_ui_input(true)
 
@@ -144,8 +136,7 @@ func _on_player_dicesplit(new_die_pos:Vector2, new_die_size:Vector2, new_die_fac
 	new_die.global_position.x = new_die_pos.x
 	new_die.global_position.y = new_die_pos.y
 	new_die.set_size(new_die_size)
-	new_die.on_playerdiceroll.connect(_on_player_diceroll)
-	new_die.on_playerdicesplit.connect(_on_player_dicesplit)
+	update_dice()
 
 func update_life():
 	
@@ -178,17 +169,29 @@ func _on_despawn_3d_dice_timer_timeout() -> void:
 	$UIControl/AnimatedDiceResultText._start_size_anim()
 
 func _swap_to_next_enemy() -> void:
+	if encounterCounter == enemy_scene.size():
+		end_game()
+		return
+	
+	if encounterCounter == enemy_scene.size() || !$EnemySpawnTimer.is_stopped():
+		return
 	current_enemy.respond_to_condition_result(last_rolled_die_condition)
+	last_rolled_die_condition = false
 	await get_tree().create_timer(1.5).timeout
 	current_enemy.queue_free()
+	encounterCounter += 1
 	$EnemySpawnTimer.start()
 	
 func _on_animation_player_animation_finished() -> void:
-	if !enemy_condition_passed:
+	if encounterCounter == enemy_scene.size() || !$EnemySpawnTimer.is_stopped():
+		return
+	if !last_rolled_die_condition:
 		_player_receives_damage()
-	
 	_swap_to_next_enemy()
 
 func _on_pass_button_pressed() -> void:
+	if encounterCounter == enemy_scene.size() || !$EnemySpawnTimer.is_stopped():
+		return
 	_player_receives_damage()
+	_enable_disable_ui_input(false)
 	_swap_to_next_enemy()
