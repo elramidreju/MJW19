@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwlqsssnfmg71"]
+[gd_scene load_steps=6 format=3 uid="uid://cwlqsssnfmg71"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_7g3cs"]
 [ext_resource type="Texture2D" uid="uid://bu8qikf3j5138" path="res://art/characters/Enemigo1_sucio.png" id="2_bcepd"]
+[ext_resource type="FontFile" uid="uid://b760d8ijble4l" path="res://Sakura Blossom.ttf" id="2_h62kv"]
 [ext_resource type="Texture2D" uid="uid://bvpos8pe16r86" path="res://art/characters/Enemigo1_limpio.png" id="3_e0rni"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_alwyy"]
@@ -41,6 +42,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 pixel_size = 0.008
 billboard = 2
 text = "lorem ipsum"
+font = ExtResource("2_h62kv")
 
 [node name="EnemySprite" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.0015

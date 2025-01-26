@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bis0ntw3p50o1"
+path="res://.godot/imported/Fondo.obj-30082e26239cd0d9e6bbe2f386f5d2bb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Fondo.obj-30082e26239cd0d9e6bbe2f386f5d2bb.mesh"]
+
+source_file="res://art/backgrounds/Fondo.obj"
+dest_files=["res://.godot/imported/Fondo.obj-30082e26239cd0d9e6bbe2f386f5d2bb.mesh", "res://.godot/imported/Fondo.obj-30082e26239cd0d9e6bbe2f386f5d2bb.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

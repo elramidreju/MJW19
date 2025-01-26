@@ -41,7 +41,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if current_enemy != null && $EnemySpawnTimer.is_stopped():
+		if current_enemy.position.x > $Root3D/EnemyPlaceholder.position.x:
+			current_enemy.position.x -= delta * 0.15
+		
+		if current_enemy.position.x < $Root3D/EnemyPlaceholder.position.x:
+			current_enemy.position.x = $Root3D/EnemyPlaceholder.position.x
 	
 func _on_start_timer_timeout() -> void:
 	new_game()
@@ -110,6 +115,7 @@ func spawn_next_enemy() -> void:
 	get_node("Root3D").add_child(current_enemy)
 	current_enemy.transform = $Root3D/EnemyPlaceholder.transform
 	current_enemy.position.y = player.position.y
+	current_enemy.position.x = 0.4
 	
 	_enable_disable_ui_input(true)
 

@@ -9,7 +9,8 @@ var AnimationsToPlay : Array[String] = []
 var initial_bubble_position
 var initial_bubble_scale
 var initial_bubble_sprite
-var bubble_time := 0
+var bubble_time := 0.0
+var elapsed_time := 0.0
 @export var exploded_bubble : Texture
 
 # Called when the node enters the scene tree for the first time.
@@ -28,7 +29,13 @@ func _process(delta: float) -> void:
 	if !$BubbleAttackTimer.is_stopped():
 		bubble_time+=delta
 		$BubbleSprite.position += Vector3(delta, -delta * 0.8, 0.0) * 2
+		
+		#var random = RandomNumberGenerator.new().randfn(0.0, 0.1) * delta
+		#$BubbleSprite.position += Vector3(random, random, 0.0)
 		$BubbleSprite.scale += Vector3(delta, delta, delta) * 0.05
+	
+	elapsed_time+=delta
+	$AnimatedSprite3D.rotation.y += sin(elapsed_time * 3) * 0.015
 
 func _animation_finished():
 	if AnimationsToPlay.size() == 0:

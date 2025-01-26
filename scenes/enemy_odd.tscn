@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dql3v2r7wgc1n"]
+[gd_scene load_steps=6 format=3 uid="uid://dql3v2r7wgc1n"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_l835m"]
+[ext_resource type="FontFile" uid="uid://b760d8ijble4l" path="res://Sakura Blossom.ttf" id="2_84onb"]
 [ext_resource type="Texture2D" uid="uid://sl45inm5pwba" path="res://art/characters/Enemigo2_sucio.png" id="2_qx531"]
 [ext_resource type="Texture2D" uid="uid://bdxr0tib7j7tm" path="res://art/characters/Enemigo2_limpio.png" id="3_wtpyd"]
 
@@ -41,9 +42,9 @@ condition_values = Array[int]([1])
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65666, 0)
 pixel_size = 0.008
 text = "lorem ipsum"
+font = ExtResource("2_84onb")
 
 [node name="EnemySprite" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.0015
-billboard = 2
 sprite_frames = SubResource("SpriteFrames_t0fic")
 animation = &"cleaned"

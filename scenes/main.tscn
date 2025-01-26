@@ -1,25 +1,25 @@
-[gd_scene load_steps=41 format=3 uid="uid://t747cctvqypi"]
+[gd_scene load_steps=44 format=3 uid="uid://t747cctvqypi"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r0c47"]
-[ext_resource type="PackedScene" uid="uid://dlga0qecmnc5d" path="res://Scenes/player.tscn" id="2_matdk"]
+[ext_resource type="PackedScene" uid="uid://dlga0qecmnc5d" path="res://scenes/player.tscn" id="2_matdk"]
 [ext_resource type="Texture2D" uid="uid://beqgm48w0mswq" path="res://granite.jpg" id="3_cpt02"]
-[ext_resource type="PackedScene" uid="uid://dmvtlc83vtaos" path="res://Scenes/mage.tscn" id="3_nlx8h"]
-[ext_resource type="PackedScene" uid="uid://d27525cf1ywew" path="res://Scenes/enemy_range.tscn" id="3_odqd2"]
-[ext_resource type="PackedScene" uid="uid://bwqfbxg6psror" path="res://Scenes/animated_ui_heart.tscn" id="4_e48tv"]
-[ext_resource type="PackedScene" uid="uid://dql3v2r7wgc1n" path="res://Scenes/enemy_odd.tscn" id="4_oes5l"]
-[ext_resource type="PackedScene" uid="uid://cwlqsssnfmg71" path="res://Scenes/enemy_morethan.tscn" id="5_lk0j8"]
-[ext_resource type="PackedScene" uid="uid://bx3v0fphb6k0q" path="res://Scenes/die_3d.tscn" id="7_1poff"]
-[ext_resource type="PackedScene" uid="uid://dkauyvf72kbw7" path="res://Scenes/ui_die.tscn" id="8_kx7os"]
-[ext_resource type="PackedScene" uid="uid://cii2bhfcsufbf" path="res://Scenes/die_D8.tscn" id="9_7xpb8"]
+[ext_resource type="PackedScene" uid="uid://dmvtlc83vtaos" path="res://scenes/mage.tscn" id="3_nlx8h"]
+[ext_resource type="PackedScene" uid="uid://d27525cf1ywew" path="res://scenes/enemy_range.tscn" id="3_odqd2"]
+[ext_resource type="PackedScene" uid="uid://bwqfbxg6psror" path="res://scenes/animated_ui_heart.tscn" id="4_e48tv"]
+[ext_resource type="PackedScene" uid="uid://dql3v2r7wgc1n" path="res://scenes/enemy_odd.tscn" id="4_oes5l"]
+[ext_resource type="PackedScene" uid="uid://cwlqsssnfmg71" path="res://scenes/enemy_morethan.tscn" id="5_lk0j8"]
+[ext_resource type="PackedScene" uid="uid://bx3v0fphb6k0q" path="res://scenes/die_3d.tscn" id="7_1poff"]
+[ext_resource type="PackedScene" uid="uid://dkauyvf72kbw7" path="res://scenes/ui_die.tscn" id="8_kx7os"]
+[ext_resource type="PackedScene" uid="uid://cii2bhfcsufbf" path="res://scenes/die_D8.tscn" id="9_7xpb8"]
 [ext_resource type="Texture2D" uid="uid://nrjew8iv4ya4" path="res://art/UI/Mosquito vida llena.png" id="9_cpeq5"]
-[ext_resource type="PackedScene" uid="uid://bemyewdxa7qu6" path="res://Scenes/die_D6.tscn" id="10_50c07"]
+[ext_resource type="PackedScene" uid="uid://bemyewdxa7qu6" path="res://scenes/die_D6.tscn" id="10_50c07"]
 [ext_resource type="Texture2D" uid="uid://q763c4unx664" path="res://art/UI/Mosquito vida vacia.png" id="10_nmfwh"]
-[ext_resource type="PackedScene" uid="uid://lehk4xls0fet" path="res://Scenes/mosquitoe.tscn" id="11_4k0fp"]
-[ext_resource type="PackedScene" uid="uid://df21w8ia8gsk3" path="res://Scenes/die_D4.tscn" id="11_nr38y"]
-[ext_resource type="PackedScene" uid="uid://mdjs78ro6gao" path="res://Scenes/surface_3d_dice.tscn" id="11_xvhqt"]
-[ext_resource type="PackedScene" uid="uid://b7s031ptk10r4" path="res://Scenes/die_D3.tscn" id="12_1w7ll"]
+[ext_resource type="PackedScene" uid="uid://lehk4xls0fet" path="res://scenes/mosquitoe.tscn" id="11_4k0fp"]
+[ext_resource type="PackedScene" uid="uid://df21w8ia8gsk3" path="res://scenes/die_D4.tscn" id="11_nr38y"]
+[ext_resource type="PackedScene" path="res://Scenes/surface_3d_dice.tscn" id="11_xvhqt"]
+[ext_resource type="PackedScene" uid="uid://b7s031ptk10r4" path="res://scenes/die_D3.tscn" id="12_1w7ll"]
 [ext_resource type="Texture2D" uid="uid://dhobadkgu4pnt" path="res://icon.svg" id="13_01faa"]
-[ext_resource type="PackedScene" uid="uid://dlatb8aso4231" path="res://Scenes/animated_ui_dice_result_text.tscn" id="13_l55c5"]
+[ext_resource type="PackedScene" uid="uid://dlatb8aso4231" path="res://scenes/animated_ui_dice_result_text.tscn" id="13_l55c5"]
 [ext_resource type="Texture2D" uid="uid://b3y0cqxwwimw5" path="res://art/characters/proto_player.png" id="14_lx06f"]
 [ext_resource type="Texture2D" uid="uid://c24d6lh0nfd0i" path="res://art/UI/UID8.png" id="15_xwpu8"]
 [ext_resource type="Texture2D" uid="uid://cfsn113q3u3al" path="res://art/UI/D8ClaroCuadrado.png" id="16_6dib5"]
@@ -36,6 +36,8 @@
 [ext_resource type="Texture2D" uid="uid://cot5ubbyaqy4v" path="res://art/UI/D3ClaroCuadrado.png" id="25_litbb"]
 [ext_resource type="Texture2D" uid="uid://eogurb5ovbeo" path="res://art/characters/mago_pompas.png" id="26_ex575"]
 [ext_resource type="Texture2D" uid="uid://c2yq0eratmkdv" path="res://art/UI/D3OscuroCuadrado.png" id="26_pv3hg"]
+[ext_resource type="Texture2D" uid="uid://cfib0xpoxdsfs" path="res://art/backgrounds/Tex pared azul.jpg" id="35_j7yyg"]
+[ext_resource type="ArrayMesh" uid="uid://bis0ntw3p50o1" path="res://art/backgrounds/Fondo.obj" id="36_bh0na"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xhi71"]
 
@@ -49,6 +51,9 @@ sky = SubResource("Sky_1wbys")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gg0w8"]
 albedo_color = Color(0.980789, 0.802796, 0.740801, 1)
 albedo_texture = ExtResource("3_cpt02")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mrxke"]
+albedo_texture = ExtResource("35_j7yyg")
 
 [node name="RootCanvas" type="CanvasLayer"]
 script = ExtResource("1_r0c47")
@@ -102,6 +107,7 @@ texture = ExtResource("17_36y7p")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Root3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29073, 0.152667, -0.621595)
+visible = false
 flip_faces = true
 size = Vector3(1.98633, 1, 1.3439)
 material = SubResource("StandardMaterial3D_gg0w8")
@@ -130,6 +136,11 @@ visible = false
 pixel_size = 0.0025
 billboard = 2
 texture = ExtResource("26_ex575")
+
+[node name="Fondo" type="MeshInstance3D" parent="Root3D"]
+transform = Transform3D(0.222904, 0, 0.113198, 0, 0.25, 0, -0.113198, 0, 0.222904, -0.368, -0.392, -0.593)
+material_override = SubResource("StandardMaterial3D_mrxke")
+mesh = ExtResource("36_bh0na")
 
 [node name="UIControl" type="Control" parent="."]
 top_level = true
