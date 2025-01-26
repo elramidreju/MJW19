@@ -1,17 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkauyvf72kbw7"]
+[gd_scene load_steps=6 format=3 uid="uid://dkauyvf72kbw7"]
 
 [ext_resource type="Script" path="res://Scripts/ui_die.gd" id="1_losgl"]
 [ext_resource type="Texture2D" uid="uid://c24d6lh0nfd0i" path="res://art/UI/UID8.png" id="2_tbcub"]
 [ext_resource type="Texture2D" uid="uid://dc07t7iljs1vt" path="res://art/UI/D8OscuroCuadrado.png" id="3_0e2xs"]
 [ext_resource type="Texture2D" uid="uid://cfsn113q3u3al" path="res://art/UI/D8ClaroCuadrado.png" id="4_fpbjh"]
+[ext_resource type="FontFile" uid="uid://b760d8ijble4l" path="res://Sakura Blossom.ttf" id="5_8v27i"]
 
 [node name="Die" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -952.0
-offset_bottom = -473.0
+offset_right = -1030.0
+offset_bottom = -395.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_losgl")
@@ -22,26 +23,27 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -25.0
-offset_right = 25.0
-offset_bottom = 49.0
+offset_left = -35.0
+offset_right = 15.0
+offset_bottom = 65.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 35
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_8v27i")
+theme_override_font_sizes/font_size = 45
 text = "D0"
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -250.0
+offset_right = 125.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 texture_normal = ExtResource("2_tbcub")
 texture_pressed = ExtResource("3_0e2xs")
 texture_hover = ExtResource("4_fpbjh")

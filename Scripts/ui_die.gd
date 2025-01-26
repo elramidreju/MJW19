@@ -2,6 +2,7 @@ class_name UI_Die
 extends Control
 
 @export var faces:int = 0
+@export var half_die_x_offset:float = 0
 
 var input_enabled:bool = true
 
@@ -41,7 +42,7 @@ func _instantiate_half_die() -> void:
 	faces = faces/2
 	
 	var new_die_pos = Vector2(global_position.x, global_position.y) 
-	new_die_pos.x += get_size().x
+	new_die_pos.x += get_size().x + half_die_x_offset
 	on_playerdicesplit.emit(new_die_pos, get_size(), faces, self)
 
 func _roll_split() -> void:
