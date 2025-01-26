@@ -238,10 +238,7 @@ func _swap_to_next_enemy() -> void:
 		return
 	current_enemy.respond_to_condition_result(last_rolled_die_condition)
 	last_rolled_die_condition = false
-	await get_tree().create_timer(1.5).timeout
-	current_enemy.queue_free()
-	encounterCounter += 1
-	$EnemySpawnTimer.start()
+	$WaitForEnemySpawnTimer.start()
 	
 func _on_animation_player_animation_finished() -> void:
 	if encounterCounter == enemy_scene.size() || !$EnemySpawnTimer.is_stopped():
@@ -256,3 +253,8 @@ func _on_pass_button_pressed() -> void:
 	_player_receives_damage()
 	_enable_disable_ui_input(false)
 	_swap_to_next_enemy()
+
+func _on_wait_for_enemy_spawn_timer_timeout() -> void:
+	current_enemy.queue_free()
+	encounterCounter += 1
+	$EnemySpawnTimer.start()
