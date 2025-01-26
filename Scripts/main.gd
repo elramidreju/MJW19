@@ -75,14 +75,22 @@ func new_game() -> void:
 	$EnemySpawnTimer.start()
 
 func end_game() -> void:
-	print("Ending the game")
 	_enable_disable_ui_input(false)
 	if player_health > 0:
 		var mage = mage_scene.instantiate()
 		get_node("Root3D").add_child(mage)
-		mage.transform = $Root3D/EnemyPlaceholder.transform
-		mage.position.y = $Root3D/PlayerPlaceholder.position.y
-		await get_tree().create_timer(3).timeout
+		#mage.transform = $Root3D/EnemyPlaceholder.transform
+		#mage.position.y = $Root3D/PlayerPlaceholder.position.y
+		mage.transform = $Root3D/MagePlaceHolder.transform
+		
+		var animated_heart = heart_scene.instantiate()
+		$UIControl/AnimatedHeartSpawnPos.add_child(animated_heart)
+		var animated_heart_anim_player = animated_heart.get_child(2) as AnimationPlayer
+		
+		if animated_heart_anim_player != null:
+			animated_heart_anim_player.play("dice_result_size_anim")
+		
+		await get_tree().create_timer(2).timeout
 	
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
@@ -106,7 +114,6 @@ func spawn_next_enemy() -> void:
 	_enable_disable_ui_input(true)
 
 func _spawn_3d_die():
-	
 	var die_to_inst: PackedScene = null
 	
 	match last_rolled_die_faces:
