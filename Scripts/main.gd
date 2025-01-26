@@ -59,8 +59,15 @@ func update_dice() -> void:
 			dice.append(ui_control_child)
 
 	for die in dice:
-		die.on_playerdiceroll.connect(_on_player_diceroll)
-		die.on_playerdicesplit.connect(_on_player_dicesplit)
+		if not die.is_connected("on_playerdiceroll", _on_player_diceroll):
+			die.on_playerdiceroll.connect(_on_player_diceroll)
+		else:
+			print("Skipping singal connection since it is already connected")
+		
+		if not die.is_connected("on_playerdicesplit", _on_player_dicesplit):
+			die.on_playerdicesplit.connect(_on_player_dicesplit)
+		else:
+			print("Skipping signal connection since it is already connected")
 
 func new_game() -> void:
 	print("Starting new game!")
