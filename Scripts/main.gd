@@ -9,6 +9,10 @@ extends Node
 @export var die_D6: PackedScene
 @export var die_D4: PackedScene
 @export var die_D3: PackedScene
+@export var d8_texture: Texture
+@export var d6_texture: Texture
+@export var d4_texture: Texture
+@export var d3_texture: Texture
 @export var player_health: int
 @export var health_texture_filled: Texture
 @export var health_texture_empty: Texture
@@ -21,6 +25,7 @@ var dice: Array[Node] = []
 var health_elements: Array[Node] = []
 var enemy_condition_passed
 var last_rolled_die_condition:bool = false
+var last_rolled_die_faces:int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -77,11 +82,11 @@ func spawn_next_enemy() -> void:
 	
 	_enable_disable_ui_input(true)
 
-func _spawn_3d_die(faces: int):
+func _spawn_3d_die():
 	
 	var die_to_inst: PackedScene = null
 	
-	match faces:
+	match last_rolled_die_faces:
 		3: die_to_inst = die_D3
 		4: die_to_inst = die_D4
 		6: die_to_inst = die_D6
@@ -113,11 +118,13 @@ func _player_receives_damage() -> void:
 func _on_player_diceroll(rolled_die, dice_value):
 	if !$EnemySpawnTimer.is_stopped():
 		return
+	
 	_enable_disable_ui_input(false)
 	
 	player.attack_anim()
 	
-	_spawn_3d_die(rolled_die.faces)
+	last_rolled_die_faces = rolled_die.faces
+	_spawn_3d_die()
 	dice.erase(rolled_die)
 	
 	rolled_die.queue_free()
@@ -166,7 +173,16 @@ func _on_despawn_3d_dice_timer_timeout() -> void:
 	var rolled_dice = $Root3D/Spawned3DDice.get_children()
 	for die in rolled_dice:
 		die.queue_free()
-	$UIControl/AnimatedDiceResultText._start_size_anim()
+		
+	var anim_texture: Texture = null
+	
+	match last_rolled_die_faces:
+		3: anim_texture = d3_texture
+		4: anim_texture = d4_texture
+		6: anim_texture = d6_texture
+		8: anim_texture = d8_texture
+		
+	$UIControl/AnimatedDiceResultText._start_size_anim(anim_texture)
 
 func _swap_to_next_enemy() -> void:
 	if encounterCounter == enemy_scene.size():

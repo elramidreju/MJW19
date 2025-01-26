@@ -16,11 +16,11 @@ func _ready() -> void:
 func set_label_text(text):
 	$Label.text = text	
 
-func _start_size_anim() -> void:
+func _start_size_anim(new_texture_to_use) -> void:
+	$TextureRect.texture = new_texture_to_use
 	_enable()
 	$AnimationPlayer.play("dice_result_size_anim")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	$AnimationPlayer.stop()
 	_disable()
 	on_dice_result_text_anim_finished.emit()
