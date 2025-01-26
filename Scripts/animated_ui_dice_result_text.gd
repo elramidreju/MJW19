@@ -9,6 +9,7 @@ func _disable() -> void:
 func _enable() -> void:
 	$Label.visible = true
 	$TextureRect.visible = true
+	$TextureRect.size = Vector2(128.0, 128.0)
 
 func _ready() -> void:
 	_disable()
