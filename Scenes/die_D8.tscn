@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cii2bhfcsufbf"]
+[gd_scene load_steps=5 format=3 uid="uid://cii2bhfcsufbf"]
 
 [ext_resource type="Script" path="res://scripts/rotator.gd" id="1_ehr0e"]
 [ext_resource type="ArrayMesh" uid="uid://bxg5g627r0p0k" path="res://art/dice/D8.obj" id="1_suoqh"]
+[ext_resource type="Material" uid="uid://b5h5gjaa32764" path="res://materials/D8.tres" id="3_axjq8"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_137rk"]
 points = PackedVector3Array(0.217102, 0.142405, 0.0728897, 0.129399, 0.13711, -0.0148114, 0.129396, 0.142392, -0.014904, 0.129397, 0.142391, 0.1554, 0.134692, 0.0547789, 0.072887, 0.0469771, 0.137109, 0.0676106, 0.129396, 0.224904, 0.0676081, 0.217195, 0.142408, 0.0676087, 0.129397, 0.0546004, 0.0676088, 0.0468846, 0.142392, 0.0676077, 0.134693, 0.224726, 0.0728877, 0.1294, 0.13711, 0.155307, 0.217118, 0.13711, 0.0676111, 0.134692, 0.137113, 0.155221, 0.134695, 0.142389, -0.0148183, 0.0469772, 0.142389, 0.0728907, 0.134695, 0.0546862, 0.0676114, 0.134695, 0.224818, 0.0676107, 0.134695, 0.142389, 0.155314, 0.129399, 0.224811, 0.0728904, 0.1294, 0.0546931, 0.0728897, 0.134693, 0.137112, -0.0147257, 0.0470698, 0.137112, 0.0728878, 0.217025, 0.137113, 0.0728874)
@@ -13,6 +14,7 @@ script = ExtResource("1_ehr0e")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.998708, -0.0508196, 0, 0.0508196, -0.998708, 0, 0, 0, 1, 0.138235, 0.133749, -0.0707483)
 mesh = ExtResource("1_suoqh")
+surface_material_override/0 = ExtResource("3_axjq8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-0.998708, -0.0508196, 0, 0.0508196, -0.998708, 0, 0, 0, 1, 0.138235, 0.133749, -0.0707483)
