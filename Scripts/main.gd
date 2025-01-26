@@ -1,6 +1,8 @@
 extends Node
 
 @export var player_scene: PackedScene
+@export var mage_scene: PackedScene
+@export var heart_scene: PackedScene
 @export var enemy_scene: Array[PackedScene] = []
 @export var health_element: PackedScene
 @export var ui_die_scene: PackedScene
@@ -67,6 +69,15 @@ func new_game() -> void:
 
 func end_game() -> void:
 	print("Ending the game")
+	_enable_disable_ui_input(false)
+	if player_health > 0:
+		var mage = mage_scene.instantiate()
+		get_node("Root3D").add_child(mage)
+		mage.transform = $Root3D/EnemyPlaceholder.transform
+		mage.position.y = $Root3D/PlayerPlaceholder.position.y
+		await get_tree().create_timer(3).timeout
+	
+	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
 func spawn_player() -> void:
 	player = player_scene.instantiate()
@@ -76,9 +87,14 @@ func spawn_player() -> void:
 	
 func spawn_next_enemy() -> void:
 	
+	if encounterCounter == enemy_scene.size():
+		end_game()
+		return
+	
 	current_enemy = enemy_scene[encounterCounter].instantiate()
 	get_node("Root3D").add_child(current_enemy)
 	current_enemy.transform = $Root3D/EnemyPlaceholder.transform
+	current_enemy.position.y = player.position.y
 	
 	_enable_disable_ui_input(true)
 
@@ -130,8 +146,8 @@ func _on_player_diceroll(rolled_die, dice_value):
 	rolled_die.queue_free()
 	
 	last_rolled_die_condition = current_enemy.on_player_diceroll(dice_value);
-	if !last_rolled_die_condition:
-		_player_receives_damage()
+	#if !last_rolled_die_condition:
+		#_player_receives_damage()
 	
 	get_node("UIControl/AnimatedDiceResultText/Label").text = str(dice_value)
 
