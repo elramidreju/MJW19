@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://t747cctvqypi"]
+[gd_scene load_steps=28 format=3 uid="uid://t747cctvqypi"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r0c47"]
 [ext_resource type="PackedScene" uid="uid://dlga0qecmnc5d" path="res://scenes/player.tscn" id="2_matdk"]
@@ -18,10 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://df21w8ia8gsk3" path="res://scenes/die_D4.tscn" id="11_nr38y"]
 [ext_resource type="PackedScene" path="res://Scenes/surface_3d_dice.tscn" id="11_xvhqt"]
 [ext_resource type="PackedScene" uid="uid://b7s031ptk10r4" path="res://scenes/die_D3.tscn" id="12_1w7ll"]
-[ext_resource type="Texture2D" uid="uid://bqhdu64a6821c" path="res://art/backgrounds/Fondo dados.png" id="12_a8uxi"]
 [ext_resource type="Texture2D" uid="uid://dhobadkgu4pnt" path="res://icon.svg" id="13_01faa"]
 [ext_resource type="PackedScene" uid="uid://dlatb8aso4231" path="res://scenes/animated_ui_dice_result_text.tscn" id="13_l55c5"]
 [ext_resource type="Texture2D" uid="uid://b3y0cqxwwimw5" path="res://art/characters/proto_player.png" id="14_lx06f"]
+[ext_resource type="Texture2D" uid="uid://bvyyxq2eauypa" path="res://art/backgrounds/Fondo dados 2_cutout.png" id="17_36y7p"]
+[ext_resource type="Texture2D" uid="uid://bhtw115v5awi1" path="res://art/backgrounds/Fondo dados 2_cutout_invert.png" id="22_g4dvy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xhi71"]
 
@@ -71,13 +72,16 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Root3D/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.990268, -0.0121297, 0.138644, 0, 0.996195, 0.0871557, -0.139173, -0.0863075, 0.9865, 0.185, 0.095, 0)
 
-[node name="background" type="Sprite3D" parent="Root3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-visible = false
-pixel_size = 0.006
+[node name="background" type="Sprite3D" parent="Root3D/SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, 0, 0, -0.156)
+offset = Vector2(20.435, 0)
+pixel_size = 0.002
+no_depth_test = true
+fixed_size = true
 render_priority = -2
-texture = ExtResource("3_cpt02")
+texture = ExtResource("17_36y7p")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Root3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29073, 0.152667, -0.621595)
@@ -93,12 +97,14 @@ transform = Transform3D(0.50139, 0, 0, 0, 0.501387, -0.00175018, 0, 0.00175018, 
 visible = false
 
 [node name="EnemyPlaceholder" type="Sprite3D" parent="Root3D"]
-transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, -0.132, -0.223207, -0.716)
+transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, -0.132, -0.223207, -0.716)
+billboard = 2
 texture = ExtResource("13_01faa")
 
 [node name="PlayerPlaceholder" type="Sprite3D" parent="Root3D"]
-transform = Transform3D(0.107788, -0.000940648, 0.0219305, 0.000959919, 0.109996, 0, -0.0219296, 0.000191377, 0.107792, -0.567, -0.151, -0.771)
+transform = Transform3D(0.128, 0, 0, 0, 0.128, 0, 0, 0, 0.128, -0.802, -0.111, -0.771)
 pixel_size = 0.0025
+billboard = 2
 texture = ExtResource("14_lx06f")
 
 [node name="UIControl" type="Control" parent="."]
@@ -114,7 +120,7 @@ clip_contents = true
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("12_a8uxi")
+texture = ExtResource("22_g4dvy")
 expand_mode = 1
 
 [node name="D8" parent="UIControl" instance=ExtResource("8_kx7os")]

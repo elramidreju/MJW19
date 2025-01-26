@@ -62,6 +62,7 @@ exploded_bubble = ExtResource("2_x7410")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.0025
+billboard = 2
 sprite_frames = SubResource("SpriteFrames_h8gv3")
 animation = &"idle"
 autoplay = "idle"
@@ -79,11 +80,13 @@ draw_skin = SubResource("Skin_a3qv2")
 
 [node name="BubbleSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 1.02825, 2.18169, 0)
+billboard = 2
 texture = ExtResource("3_qviv4")
 
 [node name="Placeholder" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 4.84195, -0.378584, 0)
 visible = false
+billboard = 2
 texture = ExtResource("4_bx7t7")
 
 [node name="BubbleAttackTimer" type="Timer" parent="."]

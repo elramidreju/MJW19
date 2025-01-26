@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdxr0tib7j7tm"
-path.bptc="res://.godot/imported/Enemigo2_limpio.png-31e01224d3c41131b4c4e4959b5c93eb.bptc.ctex"
+uid="uid://bvyyxq2eauypa"
+path.s3tc="res://.godot/imported/Fondo dados 2_cutout.png-ef23c55666e8c0d5e13ca2ba56eb7dd2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,13 +11,13 @@ metadata={
 
 [deps]
 
-source_file="res://art/characters/Enemigo2_limpio.png"
-dest_files=["res://.godot/imported/Enemigo2_limpio.png-31e01224d3c41131b4c4e4959b5c93eb.bptc.ctex"]
+source_file="res://art/backgrounds/Fondo dados 2_cutout.png"
+dest_files=["res://.godot/imported/Fondo dados 2_cutout.png-ef23c55666e8c0d5e13ca2ba56eb7dd2.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

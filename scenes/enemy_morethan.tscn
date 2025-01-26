@@ -39,6 +39,7 @@ condition_values = Array[int]([2])
 [node name="EnemyLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 pixel_size = 0.008
+billboard = 2
 text = "lorem ipsum"
 
 [node name="EnemySprite" type="AnimatedSprite3D" parent="."]
