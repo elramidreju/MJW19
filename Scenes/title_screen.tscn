@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://lrm0ui1v6dv4"]
+[gd_scene load_steps=4 format=3 uid="uid://lrm0ui1v6dv4"]
 
 [ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_cj57r"]
-[ext_resource type="Texture2D" uid="uid://beqgm48w0mswq" path="res://granite.jpg" id="2_4ki6u"]
+[ext_resource type="Texture2D" uid="uid://b0o8c2v2j1ce6" path="res://art/backgrounds/TitleScreenBackground.png" id="2_t64au"]
+[ext_resource type="Texture2D" uid="uid://dph26cw3f8dtu" path="res://art/UI/TitleScreenButton.png" id="3_3t8qy"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -12,6 +13,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cj57r")
 
+[node name="AudioSource" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
+
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -19,52 +23,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_4ki6u")
+texture = ExtResource("2_t64au")
+expand_mode = 1
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="PlayButton" type="TextureButton" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -30.0
-offset_right = 100.0
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(100, 30)
-text = "JUGAR"
-
-[node name="HowToButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = 60.0
-offset_right = 100.0
-offset_bottom = 120.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(100, 30)
-text = "INSTRUCCIONES"
-
-[node name="AudioSource" type="AudioStreamPlayer2D" parent="."]
-bus = &"SFX"
-
-[node name="Panel" type="Panel" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 11
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -399.0
+offset_left = -256.0
+offset_top = -256.0
 grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(128, 128)
+texture_normal = ExtResource("3_3t8qy")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="PlayText" type="Label" parent="PlayButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 3.0
+offset_right = 28.0
+offset_bottom = 33.0
+grow_horizontal = 2
 grow_vertical = 2
+rotation = -0.368751
+pivot_offset = Vector2(30, 15)
+text = "JUGAR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 853.0
+offset_top = 267.0
+offset_right = 1153.0
+offset_bottom = 367.0
+text = "Burbujas y dados:
+¡Menudo desaguisado!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
