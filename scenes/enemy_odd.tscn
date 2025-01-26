@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_l835m"]
 [ext_resource type="Texture2D" uid="uid://sl45inm5pwba" path="res://art/characters/Enemigo2_sucio.png" id="2_qx531"]
-[ext_resource type="Texture2D" uid="uid://bywr00ulypbqm" path="res://art/characters/Enemigo3_limpio.png" id="3_mm1ux"]
+[ext_resource type="Texture2D" uid="uid://bdxr0tib7j7tm" path="res://art/characters/Enemigo2_limpio.png" id="3_wtpyd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t0fic"]
 animations = [{
@@ -16,7 +16,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 10.0,
-"texture": ExtResource("3_mm1ux")
+"texture": ExtResource("3_wtpyd")
 }],
 "loop": false,
 "name": &"cleaned",
@@ -45,4 +45,4 @@ text = "lorem ipsum"
 [node name="EnemySprite" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.0015
 sprite_frames = SubResource("SpriteFrames_t0fic")
-animation = &"attacking"
+animation = &"cleaned"

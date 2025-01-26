@@ -20,6 +20,7 @@ var encounterCounter: int = 0
 var dice: Array[Node] = []
 var health_elements: Array[Node] = []
 var enemy_condition_passed
+var last_rolled_die_condition:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -129,14 +130,11 @@ func _on_player_diceroll(rolled_die, dice_value):
 	
 	rolled_die.queue_free()
 	
-	var condition_passed = current_enemy.on_player_diceroll(dice_value);
-	if !condition_passed:
+	last_rolled_die_condition = current_enemy.on_player_diceroll(dice_value);
+	if !last_rolled_die_condition:
 		_player_receives_damage()
 	
 	get_node("UIControl/AnimatedDiceResultText/Label").text = str(dice_value)
-	var enemy_condition_passed = current_enemy.on_player_diceroll(dice_value);
-	current_enemy.queue_free()
-	#$EnemySpawnTimer.start()
 
 func _on_player_dicesplit(new_die_pos:Vector2, new_die_size:Vector2, new_die_faces_num:int) -> void:
 	var new_die:UI_Die = ui_die_scene.instantiate() as UI_Die
@@ -179,13 +177,18 @@ func _on_despawn_3d_dice_timer_timeout() -> void:
 		die.queue_free()
 	$UIControl/AnimatedDiceResultText._start_size_anim()
 
+func _swap_to_next_enemy() -> void:
+	current_enemy.respond_to_condition_result(last_rolled_die_condition)
+	await get_tree().create_timer(1.5).timeout
+	current_enemy.queue_free()
+	$EnemySpawnTimer.start()
+	
 func _on_animation_player_animation_finished() -> void:
 	if !enemy_condition_passed:
 		_player_receives_damage()
-
-	$EnemySpawnTimer.start()
+	
+	_swap_to_next_enemy()
 
 func _on_pass_button_pressed() -> void:
 	_player_receives_damage()
-	current_enemy.queue_free()
-	$EnemySpawnTimer.start()
+	_swap_to_next_enemy()

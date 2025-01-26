@@ -55,13 +55,10 @@ func update_anim(_delta):
 	
 	rotation = Vector3(initial_rotation.x, 0.0, initial_rotation.z + rocking)
 	#rotation = Vector3(initial_rotation.x, rotation.y + cos(_delta), initial_rotation.z)
-	
-	
-
 
 func on_player_diceroll(die_value) -> bool:
 	var condition_met := false
-	if enemy_condition == EnemyType.MoreThan && die_value == condition_values[0]: 
+	if enemy_condition == EnemyType.MoreThan && die_value > condition_values[0]: 
 		condition_met = true;
 	if enemy_condition == EnemyType.Ranged:
 		if die_value >= condition_values[0] && die_value <= condition_values[1]: 
@@ -69,14 +66,15 @@ func on_player_diceroll(die_value) -> bool:
 	if enemy_condition == EnemyType.Odd && die_value % 2 == 1: 
 		condition_met = true;
 	
-	if condition_met:
+	return condition_met
+
+func respond_to_condition_result(codition_result) -> void:
+	if codition_result:
 		has_been_cleaned = true
 		EnemySprite.play("cleaned")
 	else:
 		EnemySprite.play("attacking")
 		
-	return condition_met
-	enemy_result.emit(condition_met)
 
 func _animation_finished():
 	if has_been_cleaned:

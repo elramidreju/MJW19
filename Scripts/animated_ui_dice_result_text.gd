@@ -4,9 +4,11 @@ signal on_dice_result_text_anim_finished(roll_die_result)
 
 func _disable() -> void:
 	$Label.visible = false
+	$TextureRect.visible = false
 
 func _enable() -> void:
 	$Label.visible = true
+	$TextureRect.visible = true
 
 func _ready() -> void:
 	_disable()
