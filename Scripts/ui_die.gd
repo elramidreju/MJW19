@@ -5,15 +5,20 @@ extends Control
 
 var input_enabled:bool = true
 
+@export var button_textures: Array[Texture2D] = []
+
 signal on_playerdiceroll(rolled_die, roll_die_result)
-signal on_playerdicesplit(new_die_pos, new_die_size, new_die_faces_num)
+signal on_playerdicesplit(new_die_pos, new_die_size, new_die_faces_num, old_die)
 
 func _set_input_enabled(new_value:bool) -> void:
 	input_enabled = new_value
 
 func _update_ui() -> void:
 	$Label.text = "D" + str(faces)
-
+	$TextureButton.texture_normal = button_textures[0]
+	$TextureButton.texture_pressed = button_textures[1]
+	$TextureButton.texture_hover = button_textures[2]
+	
 func _ready() -> void:
 	_update_ui()
 
@@ -32,16 +37,12 @@ func _roll_die() -> void:
 	var roll_die_result = randi_range(1, faces)
 	on_playerdiceroll.emit(self, roll_die_result)
 
-func _split_die()-> void:
-	faces = faces/2
-	_update_ui()
-	
 func _instantiate_half_die() -> void:
-	_split_die()
+	faces = faces/2
 	
 	var new_die_pos = Vector2(global_position.x, global_position.y) 
 	new_die_pos.x += get_size().x
-	on_playerdicesplit.emit(new_die_pos, get_size(), faces)
+	on_playerdicesplit.emit(new_die_pos, get_size(), faces, self)
 
 func _roll_split() -> void:
 	if faces <= 4:

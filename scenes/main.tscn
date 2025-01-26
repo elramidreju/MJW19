@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://t747cctvqypi"]
+[gd_scene load_steps=41 format=3 uid="uid://t747cctvqypi"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r0c47"]
 [ext_resource type="PackedScene" uid="uid://dlga0qecmnc5d" path="res://Scenes/player.tscn" id="2_matdk"]
@@ -22,12 +22,20 @@
 [ext_resource type="PackedScene" uid="uid://dlatb8aso4231" path="res://Scenes/animated_ui_dice_result_text.tscn" id="13_l55c5"]
 [ext_resource type="Texture2D" uid="uid://b3y0cqxwwimw5" path="res://art/characters/proto_player.png" id="14_lx06f"]
 [ext_resource type="Texture2D" uid="uid://c24d6lh0nfd0i" path="res://art/UI/UID8.png" id="15_xwpu8"]
+[ext_resource type="Texture2D" uid="uid://cfsn113q3u3al" path="res://art/UI/D8ClaroCuadrado.png" id="16_6dib5"]
 [ext_resource type="Texture2D" uid="uid://cscmopm8vohf8" path="res://art/UI/UID6.png" id="16_7bud8"]
 [ext_resource type="Texture2D" uid="uid://c3qbhoa3vlf0k" path="res://art/UI/UID4.png" id="17_4d32f"]
 [ext_resource type="Texture2D" uid="uid://bvyyxq2eauypa" path="res://art/backgrounds/Fondo dados 2_cutout.png" id="17_36y7p"]
-[ext_resource type="Texture2D" uid="uid://bl8ev7v2kg6f4" path="res://art/UI/D3_2.png" id="18_6y0gv"]
+[ext_resource type="Texture2D" uid="uid://dc07t7iljs1vt" path="res://art/UI/D8OscuroCuadrado.png" id="17_i54gf"]
+[ext_resource type="Texture2D" uid="uid://cc7guonkyorua" path="res://art/UI/D6ClaroCuadrado.png" id="19_t4aj5"]
+[ext_resource type="Texture2D" uid="uid://br6lwq6aq51ns" path="res://art/UI/D6OscuroCuadrado.png" id="20_tjrv0"]
 [ext_resource type="Texture2D" uid="uid://bhtw115v5awi1" path="res://art/backgrounds/Fondo dados 2_cutout_invert.png" id="22_g4dvy"]
+[ext_resource type="Texture2D" uid="uid://day67v0mtkokh" path="res://art/UI/D4ClaroCuadrado.png" id="22_rncn0"]
+[ext_resource type="Texture2D" uid="uid://5ibe22tujwk3" path="res://art/UI/D4OscuroCuadrado.png" id="23_wxf7v"]
+[ext_resource type="Texture2D" uid="uid://degdle54f3urd" path="res://art/UI/UID3.png" id="24_retko"]
+[ext_resource type="Texture2D" uid="uid://cot5ubbyaqy4v" path="res://art/UI/D3ClaroCuadrado.png" id="25_litbb"]
 [ext_resource type="Texture2D" uid="uid://eogurb5ovbeo" path="res://art/characters/mago_pompas.png" id="26_ex575"]
+[ext_resource type="Texture2D" uid="uid://c2yq0eratmkdv" path="res://art/UI/D3OscuroCuadrado.png" id="26_pv3hg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xhi71"]
 
@@ -55,10 +63,10 @@ die_D8 = ExtResource("9_7xpb8")
 die_D6 = ExtResource("10_50c07")
 die_D4 = ExtResource("11_nr38y")
 die_D3 = ExtResource("12_1w7ll")
-d8_texture = ExtResource("15_xwpu8")
-d6_texture = ExtResource("16_7bud8")
-d4_texture = ExtResource("17_4d32f")
-d3_texture = ExtResource("18_6y0gv")
+ui_d8_textures = Array[Texture2D]([ExtResource("15_xwpu8"), ExtResource("16_6dib5"), ExtResource("17_i54gf")])
+ui_d6_textures = Array[Texture2D]([ExtResource("16_7bud8"), ExtResource("19_t4aj5"), ExtResource("20_tjrv0")])
+ui_d4_textures = Array[Texture2D]([ExtResource("17_4d32f"), ExtResource("22_rncn0"), ExtResource("23_wxf7v")])
+ui_d3_textures = Array[Texture2D]([ExtResource("24_retko"), ExtResource("25_litbb"), ExtResource("26_pv3hg")])
 player_health = 2
 health_texture_filled = ExtResource("9_cpeq5")
 health_texture_empty = ExtResource("10_nmfwh")
@@ -139,32 +147,6 @@ offset_bottom = 1080.0
 texture = ExtResource("22_g4dvy")
 expand_mode = 1
 
-[node name="D8" parent="UIControl" instance=ExtResource("8_kx7os")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_right = 0.0
-offset_left = 1049.0
-offset_top = -535.0
-offset_right = 1299.0
-offset_bottom = -335.0
-grow_horizontal = 1
-grow_vertical = 0
-faces = 8
-
-[node name="D6" parent="UIControl" instance=ExtResource("8_kx7os")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_right = 0.0
-offset_left = 1050.0
-offset_top = -322.0
-offset_right = 1300.0
-offset_bottom = -122.0
-grow_horizontal = 1
-grow_vertical = 0
-faces = 6
-
 [node name="AnimatedDiceResultText" parent="UIControl" instance=ExtResource("13_l55c5")]
 layout_mode = 1
 offset_right = 0.0
@@ -199,6 +181,23 @@ offset_left = 158.0
 offset_top = 180.0
 offset_right = 198.0
 offset_bottom = 220.0
+
+[node name="D8" parent="UIControl" instance=ExtResource("8_kx7os")]
+layout_mode = 1
+offset_left = 1049.0
+offset_top = 545.0
+offset_right = -621.0
+offset_bottom = -335.0
+faces = 8
+
+[node name="D6" parent="UIControl" instance=ExtResource("8_kx7os")]
+layout_mode = 1
+offset_left = 1050.0
+offset_top = 758.0
+offset_right = -620.0
+offset_bottom = -122.0
+faces = 6
+button_textures = Array[Texture2D]([ExtResource("16_7bud8"), ExtResource("19_t4aj5"), ExtResource("20_tjrv0")])
 
 [node name="StartTimer" type="Timer" parent="."]
 one_shot = true

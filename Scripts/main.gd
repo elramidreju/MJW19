@@ -11,10 +11,10 @@ extends Node
 @export var die_D6: PackedScene
 @export var die_D4: PackedScene
 @export var die_D3: PackedScene
-@export var d8_texture: Texture
-@export var d6_texture: Texture
-@export var d4_texture: Texture
-@export var d3_texture: Texture
+@export var ui_d8_textures: Array[Texture2D] = []
+@export var ui_d6_textures: Array[Texture2D] = []
+@export var ui_d4_textures: Array[Texture2D] = []
+@export var ui_d3_textures: Array[Texture2D] = []
 @export var player_health: int
 @export var health_texture_filled: Texture
 @export var health_texture_empty: Texture
@@ -165,10 +165,19 @@ func _on_player_diceroll(rolled_die, dice_value):
 	
 	get_node("UIControl/AnimatedDiceResultText/Label").text = str(dice_value)
 
-func _on_player_dicesplit(new_die_pos:Vector2, new_die_size:Vector2, new_die_faces_num:int) -> void:
+func _on_player_dicesplit(new_die_pos:Vector2, new_die_size:Vector2, new_die_faces_num:int, old_die) -> void:
 	var new_die:UI_Die = ui_die_scene.instantiate() as UI_Die
 	$UIControl.add_child(new_die)
 	new_die.faces = new_die_faces_num
+	
+	match new_die_faces_num:
+		3: new_die.button_textures = ui_d3_textures
+		4: new_die.button_textures = ui_d4_textures
+		6: new_die.button_textures = ui_d6_textures
+		8: new_die.button_textures = ui_d8_textures
+	
+	old_die.button_textures = new_die.button_textures
+	old_die._update_ui()
 	new_die._update_ui()
 	new_die.global_position.x = new_die_pos.x
 	new_die.global_position.y = new_die_pos.y
@@ -207,10 +216,10 @@ func _on_despawn_3d_dice_timer_timeout() -> void:
 	var anim_texture: Texture = null
 	
 	match last_rolled_die_faces:
-		3: anim_texture = d3_texture
-		4: anim_texture = d4_texture
-		6: anim_texture = d6_texture
-		8: anim_texture = d8_texture
+		3: anim_texture = ui_d3_textures[0]
+		4: anim_texture = ui_d4_textures[0]
+		6: anim_texture = ui_d6_textures[0]
+		8: anim_texture = ui_d8_textures[0]
 		
 	$UIControl/AnimatedDiceResultText._start_size_anim(anim_texture)
 

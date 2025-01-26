@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkauyvf72kbw7"]
+[gd_scene load_steps=5 format=3 uid="uid://dkauyvf72kbw7"]
 
 [ext_resource type="Script" path="res://Scripts/ui_die.gd" id="1_losgl"]
-[ext_resource type="Texture2D" uid="uid://dhobadkgu4pnt" path="res://icon.svg" id="2_clj2g"]
+[ext_resource type="Texture2D" uid="uid://c24d6lh0nfd0i" path="res://art/UI/UID8.png" id="2_tbcub"]
+[ext_resource type="Texture2D" uid="uid://dc07t7iljs1vt" path="res://art/UI/D8OscuroCuadrado.png" id="3_0e2xs"]
+[ext_resource type="Texture2D" uid="uid://cfsn113q3u3al" path="res://art/UI/D8ClaroCuadrado.png" id="4_fpbjh"]
 
 [node name="Die" type="Control"]
 layout_mode = 3
@@ -13,6 +15,7 @@ offset_bottom = -473.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_losgl")
+button_textures = Array[Texture2D]([ExtResource("2_tbcub"), ExtResource("4_fpbjh"), ExtResource("3_0e2xs")])
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -28,15 +31,19 @@ text = "D0"
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -64.0
-offset_top = -128.0
+offset_top = -64.0
 offset_right = 64.0
+offset_bottom = 64.0
 grow_horizontal = 2
-grow_vertical = 0
-disabled = true
-texture_normal = ExtResource("2_clj2g")
+grow_vertical = 2
+texture_normal = ExtResource("2_tbcub")
+texture_pressed = ExtResource("3_0e2xs")
+texture_hover = ExtResource("4_fpbjh")
+ignore_texture_size = true
+stretch_mode = 0
