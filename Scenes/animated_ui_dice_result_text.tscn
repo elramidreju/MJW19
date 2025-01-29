@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlatb8aso4231"]
+[gd_scene load_steps=7 format=3 uid="uid://dlatb8aso4231"]
 
 [ext_resource type="Script" path="res://Scripts/animated_ui_dice_result_text.gd" id="1_ejl0u"]
+[ext_resource type="FontFile" uid="uid://b760d8ijble4l" path="res://Sakura Blossom.ttf" id="2_ewcaq"]
 [ext_resource type="Texture2D" uid="uid://bl8ev7v2kg6f4" path="res://art/UI/D3_2.png" id="2_ulilc"]
 
 [sub_resource type="Animation" id="Animation_ywklf"]
@@ -130,12 +131,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -410.0
-offset_top = -405.0
-offset_right = 390.0
-offset_bottom = 395.0
+offset_left = -400.0
+offset_top = -400.0
+offset_right = 400.0
+offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_ewcaq")
 theme_override_font_sizes/font_size = 0
 text = "1"
 horizontal_alignment = 1
@@ -148,10 +150,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -275.0
-offset_top = -275.0
-offset_right = 275.0
-offset_bottom = 275.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ulilc")

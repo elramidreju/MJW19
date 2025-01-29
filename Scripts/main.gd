@@ -76,7 +76,7 @@ func update_dice() -> void:
 
 func new_game() -> void:
 	print("Starting new game!")
-	$PlayerSpawnTimer.start()
+	spawn_player()
 	$EnemySpawnTimer.start()
 
 func end_game() -> void:
@@ -193,11 +193,11 @@ func _on_player_dicesplit(new_die_pos:Vector2, new_die_size:Vector2, new_die_fac
 func update_life():
 	
 	if health_elements.size() == 0:
-		for i in 3:
+		for i in 2:
 			var new_element = health_element.instantiate()
 			get_node("UIControl").add_child(new_element)
 			new_element.global_position = $UIControl/Mosquitoe_placeholder.global_position
-			new_element.global_position.x += 200.0 * i
+			new_element.global_position.x += 300.0 * i 
 			new_element.texture = health_texture_filled
 			health_elements.push_back(new_element)
 	

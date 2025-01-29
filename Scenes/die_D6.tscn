@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bemyewdxa7qu6"]
 
 [ext_resource type="ArrayMesh" uid="uid://dt2gojc52p7vi" path="res://art/dice/D6.obj" id="1_50rew"]
-[ext_resource type="Script" path="res://scripts/rotator.gd" id="1_kgxaw"]
+[ext_resource type="Script" path="res://Scripts/rotator.gd" id="1_kgxaw"]
 [ext_resource type="Material" uid="uid://c8lvw2ierhd40" path="res://materials/D6.tres" id="3_e41tp"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gcsna"]

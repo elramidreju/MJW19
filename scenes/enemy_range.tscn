@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://d27525cf1ywew"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_pl12g"]
-[ext_resource type="Texture2D" uid="uid://cxx64geutkwdq" path="res://art/characters/Enemigo3_sucio.png" id="2_248s8"]
 [ext_resource type="FontFile" uid="uid://b760d8ijble4l" path="res://Sakura Blossom.ttf" id="2_s8rla"]
-[ext_resource type="Texture2D" uid="uid://bywr00ulypbqm" path="res://art/characters/Enemigo3_limpio.png" id="3_sakm8"]
+[ext_resource type="Texture2D" uid="uid://b4w6b1no00x7u" path="res://art/characters/Enemigo 3 sucio clon.png" id="3_ikqas"]
+[ext_resource type="Texture2D" uid="uid://c2c6tj1cuu6sl" path="res://art/characters/Enemigo 3_clon.png" id="4_4sejs"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mdq4m"]
 animations = [{
 "frames": [{
 "duration": 10.0,
-"texture": ExtResource("2_248s8")
+"texture": ExtResource("3_ikqas")
 }],
 "loop": false,
 "name": &"attacking",
@@ -17,15 +17,15 @@ animations = [{
 }, {
 "frames": [{
 "duration": 10.0,
-"texture": ExtResource("3_sakm8")
+"texture": ExtResource("4_4sejs")
 }],
 "loop": false,
 "name": &"cleaned",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_248s8")
+"duration": 10.0,
+"texture": ExtResource("3_ikqas")
 }],
 "loop": false,
 "name": &"idle",
@@ -48,4 +48,4 @@ font = ExtResource("2_s8rla")
 [node name="EnemySprite" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.0015
 sprite_frames = SubResource("SpriteFrames_mdq4m")
-animation = &"attacking"
+animation = &"idle"

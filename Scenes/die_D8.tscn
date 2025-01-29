@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cii2bhfcsufbf"]
 
-[ext_resource type="Script" path="res://scripts/rotator.gd" id="1_ehr0e"]
+[ext_resource type="Script" path="res://Scripts/rotator.gd" id="1_ehr0e"]
 [ext_resource type="ArrayMesh" uid="uid://bxg5g627r0p0k" path="res://art/dice/D8.obj" id="1_suoqh"]
 [ext_resource type="Material" uid="uid://b5h5gjaa32764" path="res://materials/D8.tres" id="3_axjq8"]
 

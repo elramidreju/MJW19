@@ -25,7 +25,7 @@ func _ready() -> void:
 
 func _handle_input() -> void:
 	var mouse_pos_viewport:Vector2 =  get_viewport().get_mouse_position()
-	if input_enabled && mouse_pos_viewport.x >= global_position.x && mouse_pos_viewport.x <= global_position.x + get_size().x && mouse_pos_viewport.y >= global_position.y && mouse_pos_viewport.y <= global_position.y + get_size().y :
+	if input_enabled && mouse_pos_viewport.x >= $TextureButton.global_position.x && mouse_pos_viewport.x <= $TextureButton.global_position.x + get_size().x && mouse_pos_viewport.y >= $TextureButton.global_position.y && mouse_pos_viewport.y <= $TextureButton.global_position.y + get_size().y :
 		if Input.is_action_just_pressed("LMouse"):
 			_roll_die()
 		if Input.is_action_just_pressed("RMouse"):

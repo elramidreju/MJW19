@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3y0cqxwwimw5"
-path.bptc="res://.godot/imported/proto_player.png-4df4e33bb3a9a45b9e60b869ed169c70.bptc.ctex"
+path.s3tc="res://.godot/imported/proto_player.png-4df4e33bb3a9a45b9e60b869ed169c70.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,12 +12,12 @@ metadata={
 [deps]
 
 source_file="res://art/characters/proto_player.png"
-dest_files=["res://.godot/imported/proto_player.png-4df4e33bb3a9a45b9e60b869ed169c70.bptc.ctex"]
+dest_files=["res://.godot/imported/proto_player.png-4df4e33bb3a9a45b9e60b869ed169c70.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://lrm0ui1v6dv4"]
+[gd_scene load_steps=6 format=3 uid="uid://lrm0ui1v6dv4"]
 
-[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_cj57r"]
-[ext_resource type="Texture2D" uid="uid://b0o8c2v2j1ce6" path="res://art/backgrounds/TitleScreenBackground.png" id="2_t64au"]
+[ext_resource type="Script" path="res://title_screen.gd" id="1_cj57r"]
+[ext_resource type="PackedScene" uid="uid://t747cctvqypi" path="res://scenes/main.tscn" id="2_013w6"]
 [ext_resource type="Texture2D" uid="uid://dph26cw3f8dtu" path="res://art/UI/TitleScreenButton.png" id="3_3t8qy"]
+[ext_resource type="Texture2D" uid="uid://dya8bcnh07cd3" path="res://art/backgrounds/title.jpg" id="3_qlppa"]
 [ext_resource type="FontFile" uid="uid://b760d8ijble4l" path="res://Sakura Blossom.ttf" id="4_uhhyl"]
 
 [node name="TitleScreen" type="Control"]
@@ -13,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cj57r")
+main_scene = ExtResource("2_013w6")
 
 [node name="AudioSource" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"
@@ -24,7 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_t64au")
+texture = ExtResource("3_qlppa")
 expand_mode = 1
 
 [node name="PlayButton" type="TextureButton" parent="."]
@@ -66,6 +68,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Title" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 687.0
 offset_top = 257.0

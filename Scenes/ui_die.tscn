@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkauyvf72kbw7"]
+[gd_scene load_steps=7 format=3 uid="uid://dkauyvf72kbw7"]
 
 [ext_resource type="Script" path="res://Scripts/ui_die.gd" id="1_losgl"]
 [ext_resource type="Texture2D" uid="uid://c24d6lh0nfd0i" path="res://art/UI/UID8.png" id="2_tbcub"]
 [ext_resource type="Texture2D" uid="uid://dc07t7iljs1vt" path="res://art/UI/D8OscuroCuadrado.png" id="3_0e2xs"]
 [ext_resource type="Texture2D" uid="uid://cfsn113q3u3al" path="res://art/UI/D8ClaroCuadrado.png" id="4_fpbjh"]
 [ext_resource type="FontFile" uid="uid://b760d8ijble4l" path="res://Sakura Blossom.ttf" id="5_8v27i"]
+[ext_resource type="Texture2D" uid="uid://cq8vitu32fh4j" path="res://art/UI/Pompa 3.png" id="6_lw3ej"]
 
 [node name="Die" type="Control"]
 layout_mode = 3
@@ -19,13 +20,15 @@ script = ExtResource("1_losgl")
 button_textures = Array[Texture2D]([ExtResource("2_tbcub"), ExtResource("4_fpbjh"), ExtResource("3_0e2xs")])
 
 [node name="Label" type="Label" parent="."]
+z_index = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -35.0
+offset_top = 31.295
 offset_right = 15.0
-offset_bottom = 65.0
+offset_bottom = 96.295
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_8v27i")
@@ -49,3 +52,18 @@ texture_pressed = ExtResource("3_0e2xs")
 texture_hover = ExtResource("4_fpbjh")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton"]
+self_modulate = Color(1, 1, 1, 0.329412)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.953
+offset_left = -518.0
+offset_top = -267.0
+offset_right = 2999.0
+offset_bottom = 1660.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.29, 0.29)
+texture = ExtResource("6_lw3ej")
